@@ -4,6 +4,7 @@ namespace Framework\Router;
 
 use Framework\Contracts\Runnable;
 use Framework\Http\Request;
+use http\Exception;
 
 class Router
 {
@@ -32,8 +33,10 @@ class Router
         }
 
         $mask = $this->retrieveMask($methodUri);
-        [$key, $value] = $this->extractParameters($methodUri, $mask);
-        $request->addParam($key, $value);
+        if ($this->maskHasParameters($mask)) {
+            [$key, $value] = $this->extractParameters($methodUri, $mask);
+            $request->addParam($key, $value);
+        }
 
         if ($this->runners[$methodUri] instanceof Runnable) {
             return $this->runners[$methodUri]->run($request);
@@ -43,6 +46,12 @@ class Router
             return $this->runners[$methodUri]($request);
         }
 
+    }
+
+    // TODO: refactor the two places where is used in this class, prone to errors
+    private function maskHasParameters(string $mask): bool
+    {
+        return 1 === preg_match('#{([?]?)([^}]*)}#', $mask, $matchedKey);
     }
 
     public function extractParameters(string $uri, string $mask): array
@@ -66,7 +75,7 @@ class Router
         return $method.':'.$uri;
     }
 
-    public function retrieveMask(string $methodUri)
+    public function retrieveMask(string $methodUri): string|\InvalidArgumentException
     {
         foreach ($this->runners as $mask => $runner) {
             if ($this->match($methodUri, $mask)) {
@@ -78,8 +87,10 @@ class Router
 
     private function match(string $methodUri, string $mask): bool
     {
-        [$key, $value] = $this->extractParameters($methodUri, $mask);
-        $mask = $this->maskToUriMethod($mask, $key, $value);
+        if ($this->maskHasParameters($mask)) {
+            [$key, $value] = $this->extractParameters($methodUri, $mask);
+            $mask = $this->maskToUriMethod($mask, $key, $value);
+        }
         return $methodUri === $mask;
     }
 
@@ -88,12 +99,14 @@ class Router
         return preg_replace('#{([^}]*)}#', $value, $mask);
     }
 
+    // TODO: delete?
     private function maskIsOptional(string $mask): bool
     {
         preg_match('#{([?]?)([^}]*)}#', $mask, $matchedKey);
         return !empty($matchedKey[1]);
     }
 
+    // TODO: delete?
     private function maskToRegex(string $mask): string
     {
         preg_match('#{([?]?)([^}]*)}#', $mask, $matchedKey);
