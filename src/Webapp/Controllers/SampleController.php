@@ -4,12 +4,13 @@ namespace Webapp\Controllers;
 
 use Framework\Contracts\Controller;
 use Framework\Http\Request;
+use Framework\View\Manager;
 
 class SampleController implements Controller
 {
 
     public function handle(Request $request)
     {
-        return "Hello World!";
+        return container(Manager::class)->handle('homeSample.simplephp.php');
     }
 }

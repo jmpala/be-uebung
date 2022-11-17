@@ -3,9 +3,7 @@
 namespace Framework\Router;
 
 use Framework\Contracts\Controller;
-use Framework\Contracts\Runnable;
 use Framework\Http\Request;
-use http\Exception;
 
 class Router
 {

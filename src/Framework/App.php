@@ -3,7 +3,9 @@
 namespace Framework;
 
 use Framework\Http\Request;
+use Framework\Providers\ViewHandlersProvider;
 use Framework\Router\Router;
+use Framework\View\Manager;
 
 class App
 {
@@ -36,8 +38,8 @@ class App
     {
         $this->boostrap();
 
-        $request = container()->fetch(Request::class);
-        $router = container()->fetch(Router::class);
+        $request = container(Request::class);
+        $router = container(Router::class);
 
         return $router->resolve($request);
     }
@@ -46,6 +48,7 @@ class App
     {
         $this->loadAppConfiguration();
         $this->registerInstancesIntoContainer();
+        $this->addProvidersToManagers();
         $this->registerControllers();
         $this->createRequest();
     }
@@ -70,23 +73,27 @@ class App
         }
     }
 
-    private function createRequest(): void
-    {
-        $request = \container()->fetch(Request::class);
-        $request->method($_SERVER['REQUEST_METHOD']);
-        $request->uri($_SERVER['REQUEST_URI']);
-    }
-
     private function registerControllers(): void
     {
         $path = __DIR__ . '/../../config/' . self::CONFIG_FRAMEWORK_CONTROLLERS_FILE . '.php';
         $data = require $path;
 
-        $router = container()->fetch(Router::class);
+        $router = container(Router::class);
 
         foreach ($data as $methodUri => $controller) {
             $router->register($methodUri, new $controller);
         }
     }
 
+    private function addProvidersToManagers(): void
+    {
+        \container(Manager::class)->getHandlersFromProvider(new ViewHandlersProvider());
+    }
+
+    private function createRequest(): void
+    {
+        $request = \container(Request::class);
+        $request->method($_SERVER['REQUEST_METHOD']);
+        $request->uri($_SERVER['REQUEST_URI']);
+    }
 }

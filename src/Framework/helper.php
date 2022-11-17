@@ -1,8 +1,11 @@
 <?php
 
 if (!function_exists('container')) {
-    function container(): \Framework\Container\Container
+    function container(string $alias = null): mixed
     {
-        return \Framework\Container\Container::getInstance();
+        if (is_null($alias)) {
+            return \Framework\Container\Container::getInstance();
+        }
+        return \Framework\Container\Container::getInstance()->fetch($alias);
     }
 }
