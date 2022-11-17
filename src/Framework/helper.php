@@ -9,3 +9,10 @@ if (!function_exists('container')) {
         return \Framework\Container\Container::getInstance()->fetch($alias);
     }
 }
+
+if(!function_exists('redirect')) {
+    function redirect(string $uri): void {
+        header("Location: {$uri}");
+        exit;
+    }
+}
