@@ -25,6 +25,14 @@ class Container
         return static::$instance;
     }
 
+    public static function destroy(): void
+    {
+        static::$instance = null;
+    }
+
+    private function __construct(){}
+    private function __clone(){}
+
     public function register(string $factoryName, string $class): static
     {
         $this->factories[$factoryName] = $class;

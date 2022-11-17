@@ -1,22 +1,26 @@
 <?php
 
-namespace Container;
+namespace Framework\Container;
 
-use Framework\Container\Container;
 use Framework\Router\Router;
 use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase
 {
+    public function tearDown(): void
+    {
+        Container::destroy();
+    }
+
     public function testContainerExist(): void
     {
-        $container = new Container();
+        $container = Container::getInstance();
         $this->assertNotNull($container);
     }
 
     public function testFactoryIsRegistered(): void
     {
-        $container = new Container();
+        $container = Container::getInstance();
         $factoryName = 'router';
         $container->register($factoryName, Router::class);
         $this->assertTrue($container->hasFactory($factoryName), 'instance is not registered into the container');
@@ -24,7 +28,7 @@ class ContainerTest extends TestCase
 
     public function testObtainRegisteredInstance(): void
     {
-        $container = new Container();
+        $container = Container::getInstance();
         $factoryName = 'router';
         $registeredInstance = $factoryName;
         $container->register($factoryName, Router::class);
@@ -36,7 +40,7 @@ class ContainerTest extends TestCase
 
     public function testErrorObtainingUnregisteredInstance(): void
     {
-        $container = new Container();
+        $container = Container::getInstance();
         $unknown = 'router';
 
         $this->expectException(\InvalidArgumentException::class);

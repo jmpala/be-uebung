@@ -2,6 +2,7 @@
 
 namespace Framework\Router;
 
+use Framework\Contracts\Controller;
 use Framework\Contracts\Runnable;
 use Framework\Http\Request;
 use http\Exception;
@@ -15,7 +16,7 @@ class Router
 
     public function __construct(){}
 
-    public function register(string $methodUri, Runnable|\Closure $runner): void
+    public function register(string $methodUri, Controller|\Closure $runner): void
     {
         $this->runners[$methodUri] = $runner;
     }
@@ -25,7 +26,7 @@ class Router
         return isset($this->runners[$methodUri]);
     }
 
-    public function resolve(Request $request) {
+    public function resolve(Request $request): string {
         $methodUri = $this->buildMethodUriString($request->method(), $request->uri());
 
         if (!isset($this->runners[$methodUri])) {
@@ -38,8 +39,8 @@ class Router
             $request->addParam($key, $value);
         }
 
-        if ($this->runners[$methodUri] instanceof Runnable) {
-            return $this->runners[$methodUri]->run($request);
+        if ($this->runners[$methodUri] instanceof Controller) {
+            return $this->runners[$methodUri]->handle($request);
         }
 
         if ($this->runners[$methodUri] instanceof \Closure) {

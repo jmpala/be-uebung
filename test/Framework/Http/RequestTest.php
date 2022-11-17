@@ -1,6 +1,6 @@
 <?php
 
-use Framework\Http\Request;
+namespace Framework\Http;
 
 class RequestTest extends \PHPUnit\Framework\TestCase
 {
@@ -14,14 +14,16 @@ class RequestTest extends \PHPUnit\Framework\TestCase
     {
         $method = 'GET';
         $uri = '/';
-        $request = new Request($method, $uri);
+        $request = new Request();
+        $request->method($method);
+        $request->uri($uri);
         $this->assertEquals($method, $request->method());
         $this->assertEquals($uri, $request->uri());
     }
 
     public function testExistUriParam(): void
     {
-        $request = new Request('GET', '/');
+        $request = new Request();
         $key = 'id';
         $request->addParam($key, '1');
 

@@ -6,11 +6,10 @@ class Request
 {
     protected array $uriParams = [];
 
-    public function __construct(
-        protected string $method,
-        protected string $uri
-    )
-    {}
+    protected string $method;
+    protected string $uri;
+
+    public function __construct(){}
 
     public function method(string $value = null): string|static
     {

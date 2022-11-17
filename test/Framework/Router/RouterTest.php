@@ -2,6 +2,7 @@
 
 namespace Framework\Router;
 
+use Framework\Contracts\Controller;
 use Framework\Contracts\Runnable;
 use Framework\Http\Request;
 use Framework\Http\Response;
@@ -18,7 +19,7 @@ class RouterTest extends \PHPUnit\Framework\TestCase
     {
         $router = new Router();
         $methodUri = 'GET:/';
-        $dummyRunner = $this->createMock(Runnable::class);
+        $dummyRunner = $this->createMock(Controller::class);
 
         $router->register($methodUri, $dummyRunner);
 
@@ -29,11 +30,13 @@ class RouterTest extends \PHPUnit\Framework\TestCase
     {
         $router = new Router();
         $request = new Request('GET', '/');
+        $request->method('GET');
+        $request->uri('/');
         $methodUri = 'GET:/';
-        $dummyRunner = $this->createMock(Runnable::class);
+        $dummyRunner = $this->createMock(Controller::class);
         $dummyRunner
             ->expects($this->once())
-            ->method('run')
+            ->method('handle')
             ->willReturn(new Response());
 
         $router->register($methodUri, $dummyRunner);
@@ -46,6 +49,8 @@ class RouterTest extends \PHPUnit\Framework\TestCase
     {
         $router = new Router();
         $request = new Request('GET', '/');
+        $request->method('GET');
+        $request->uri('/');
         $methodUri = 'GET:/';
 
         $router->register($methodUri, fn() => true);
@@ -58,6 +63,8 @@ class RouterTest extends \PHPUnit\Framework\TestCase
     {
         $router = new Router();
         $request = new Request('POST', '/unknown');
+        $request->method('POST');
+        $request->uri('/unknown');
 
         $this->expectException(\InvalidArgumentException::class);
         $router->resolve($request);
