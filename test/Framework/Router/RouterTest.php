@@ -37,7 +37,7 @@ class RouterTest extends \PHPUnit\Framework\TestCase
         $dummyRunner
             ->expects($this->once())
             ->method('handle')
-            ->willReturn('');
+            ->willReturn(new Response());
 
         $router->register($methodUri, $dummyRunner);
 
@@ -53,7 +53,7 @@ class RouterTest extends \PHPUnit\Framework\TestCase
         $request->uri('/');
         $methodUri = 'GET:/';
 
-        $router->register($methodUri, fn() => true);
+        $router->register($methodUri, fn() => new Response());
 
         $this->assertNotNull($router->resolve($request),
             'error calling the closure');

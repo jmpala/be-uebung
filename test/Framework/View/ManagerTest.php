@@ -28,7 +28,12 @@ class ManagerTest extends TestCase
         $handler = $this->createMock(ViewHandler::class);
         $handler
             ->expects(self::once())
-            ->method('handle');
+            ->method('handle')
+            ->willReturn('string');
+
+        $handler
+            ->method('canHandle')
+            ->willReturn(true);
 
         $handlerName = 'simpleHandler';
         $manager->registerHandler($handlerName, $handler);

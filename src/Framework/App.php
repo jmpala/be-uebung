@@ -3,6 +3,7 @@
 namespace Framework;
 
 use Framework\Http\Request;
+use Framework\Http\Response;
 use Framework\Providers\ViewHandlersProvider;
 use Framework\Router\Router;
 use Framework\View\Manager;
@@ -41,7 +42,8 @@ class App
         $request = container(Request::class);
         $router = container(Router::class);
 
-        return $router->resolve($request);
+        $response =  $router->resolve($request);
+        return $this->handleResponse($response);
     }
 
     private function boostrap(): void
@@ -95,5 +97,10 @@ class App
         $request = \container(Request::class);
         $request->method($_SERVER['REQUEST_METHOD']);
         $request->uri($_SERVER['REQUEST_URI']);
+    }
+
+    private function handleResponse(Response $response): string
+    {
+        return $response->content();
     }
 }

@@ -4,6 +4,7 @@ namespace Framework\Router;
 
 use Framework\Contracts\Controller;
 use Framework\Http\Request;
+use Framework\Http\Response;
 
 class Router
 {
@@ -24,7 +25,7 @@ class Router
         return isset($this->runners[$methodUri]);
     }
 
-    public function resolve(Request $request): string {
+    public function resolve(Request $request): Response {
         $methodUri = $this->buildMethodUriString($request->method(), $request->uri());
 
         if (!isset($this->runners[$methodUri])) {
