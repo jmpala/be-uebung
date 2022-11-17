@@ -12,11 +12,8 @@ class SampleController implements Controller
     public function handle(Request $request): Response
     {
 
-        return container(Response::class)->content(
-            container(Manager::class)
-                ->handle(
-                    'homeSample.simplephp.php', [
+        return handleView('homeSample.simplephp.php', [
                     'name' => 'Juan'
-                ]));
+                ]);
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use Framework\Http\Response;
+use Framework\View\Manager;
+
 if (!function_exists('container')) {
     function container(string $alias = null): mixed
     {
@@ -10,9 +13,17 @@ if (!function_exists('container')) {
     }
 }
 
-if(!function_exists('redirect')) {
+if (!function_exists('redirect')) {
     function redirect(string $uri): void {
         header("Location: {$uri}");
         exit;
+    }
+}
+
+if (!function_exists('handleView')) {
+    function handleView(string $uri, array $data = []): Response {
+        return container(Response::class)->content(
+            container(Manager::class)
+                ->handle($uri, $data));
     }
 }
