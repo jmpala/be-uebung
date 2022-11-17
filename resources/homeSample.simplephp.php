@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><?php echo "Hello World!" ?></h1>
+    <h1><?php echo "Hello World! {$name}" ?></h1>
+    <form method="post" action="/">
+        <p>Push me and then just touch me
+            Till I can get my</p>
+        <input type="submit" value="Satisfaction">
+    </form>
 </body>
 </html>
