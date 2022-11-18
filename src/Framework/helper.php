@@ -29,9 +29,25 @@ if (!function_exists('handleView')) {
 }
 
 if (!function_exists('configs')) {
-    function configs(string $key): array
+    function configs(string $key): array|string
     {
         $configs = require __DIR__ . '/Config/Config.php';
         return $configs[$key];
+    }
+}
+
+if (!function_exists('dbconn')){
+    function dbconn(): PDO
+    {
+        // TODO: get configuration from ENV and not configs
+        // TODO: search a way to use constants for matching config properties
+        $user = configs('database.user');
+        $password = configs('database.password');
+        $host = configs('database.host');
+        $port = configs('database.port');
+        $dbname = configs('database.dbname');
+        $dsn="mysql:host={$host};dbname={$dbname}";
+        return new PDO($dsn, $user, $password);
+        // mysql:host=localhost;port=3307;dbname=testdb
     }
 }
