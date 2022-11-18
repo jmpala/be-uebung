@@ -1,7 +1,8 @@
 <?php
 
-namespace Framework;
+namespace unit\Framework;
 
+use Framework\App;
 use PHPUnit\Framework\TestCase;
 
 class AppTest extends TestCase
@@ -14,7 +15,7 @@ class AppTest extends TestCase
 
     public function testFrameworkDIConfigFileExist(): void
     {
-        $file = __DIR__ . '/../../src/Framework/Config/DIInstancesConf.php';
+        $file = __DIR__ . '/../../../src/Framework/Config/DIInstancesConf.php';
         $data = require $file;
         self::assertFileExists($file);
         self::assertNotNull($data);
@@ -22,7 +23,7 @@ class AppTest extends TestCase
 
     public function testDBConfigFileExist(): void
     {
-        $file = __DIR__ . '/../../src/Framework/Config/DBConf.php';
+        $file = __DIR__ . '/../../../src/Framework/Config/DBConf.php';
         $data = require $file;
         self::assertFileExists($file);
         self::assertNotNull($data);

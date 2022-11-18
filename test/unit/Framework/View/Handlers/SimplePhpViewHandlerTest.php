@@ -1,7 +1,8 @@
 <?php
 
-namespace Framework\View\Handlers;
+namespace unit\Framework\View\Handlers;
 
+use Framework\View\Handlers\SimplePhpViewHandler;
 use PHPUnit\Framework\TestCase;
 
 class SimplePhpViewHandlerTest extends TestCase

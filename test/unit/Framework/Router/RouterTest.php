@@ -1,10 +1,11 @@
 <?php
 
-namespace Framework\Router;
+namespace unit\Framework\Router;
 
 use Framework\Contracts\Controller;
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Router\Router;
 
 class RouterTest extends \PHPUnit\Framework\TestCase
 {

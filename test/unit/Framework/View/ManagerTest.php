@@ -1,9 +1,10 @@
 <?php
 
-namespace Framework\View;
+namespace unit\Framework\View;
 
 use Framework\Contracts\ViewHandler;
 use Framework\Contracts\ViewHandlerProvider;
+use Framework\View\Manager;
 use PHPUnit\Framework\TestCase;
 
 class ManagerTest extends TestCase

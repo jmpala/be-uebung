@@ -1,6 +1,8 @@
 <?php
 
-namespace Framework\Http;
+namespace unit\Framework\Http;
+
+use Framework\Http\Request;
 
 class RequestTest extends \PHPUnit\Framework\TestCase
 {

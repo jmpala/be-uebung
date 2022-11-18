@@ -1,7 +1,8 @@
 <?php
 
-namespace Framework\Container;
+namespace unit\Framework\Container;
 
+use Framework\Container\Container;
 use Framework\Router\Router;
 use PHPUnit\Framework\TestCase;
 
