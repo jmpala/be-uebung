@@ -3,7 +3,6 @@
 namespace Framework\Router;
 
 use Framework\Contracts\Controller;
-use Framework\Contracts\Runnable;
 use Framework\Http\Request;
 use Framework\Http\Response;
 
@@ -92,7 +91,7 @@ class RouterTest extends \PHPUnit\Framework\TestCase
     /**
      * @return string[][]
      */
-    function provideUriAndMaskData(): array
+    public function provideUriAndMaskData(): array
     {
         return [
             'simple uri with value at the end' => [
@@ -106,6 +105,9 @@ class RouterTest extends \PHPUnit\Framework\TestCase
             ],
             'simple uri with value in the middle' => [
                 'GET:/sample/3/sample', '3', 'GET:/sample/{product}/sample', 'product'
+            ],
+            'static file uri' => [
+                'staticFile:/something.js', 'something.js', 'staticFile:/{file}', 'file'
             ],
         ];
     }
@@ -142,4 +144,35 @@ class RouterTest extends \PHPUnit\Framework\TestCase
         $router->retrieveMask($methodUri);
     }
 
+    /**
+     * @dataProvider provideStaticFileUris
+     */
+    public function testUriIsAStaticFileRequest(string $uri): void
+    {
+        $router = new Router();
+        $this->assertTrue($router->isStaticFileRequest($uri));
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function provideStaticFileUris(): array
+    {
+        return [
+            'js uri' => ['/something.js'],
+            'css uri' => ['/something.css'],
+            'jpg uri' => ['/something.jpg'],
+            'png uri' => ['/something.png'],
+        ];
+    }
+
+    /**
+     * @dataProvider provideStaticFileUris
+     */
+    public function testBuildMethodUriStringReturnsFileNameAsParameter(string $uri): void
+    {
+        $router = new Router();
+        $this->assertEquals("staticFile:{$uri}",
+            $router->buildMethodUriString('GET', $uri));
+    }
 }

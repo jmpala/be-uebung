@@ -29,4 +29,14 @@ class RequestTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($request->existParam($key), 'the param does not exist');
     }
+
+    public function retrieveExistingParam(): void
+    {
+        $request = new Request();
+        $key = 'id';
+        $value = '1';
+        $request->addParam($key, $value);
+
+        $this->assertEquals($value, $request->getParam($key));
+    }
 }

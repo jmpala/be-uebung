@@ -27,3 +27,11 @@ if (!function_exists('handleView')) {
                 ->handle($uri, $data));
     }
 }
+
+if (!function_exists('configs')) {
+    function configs(string $key): array
+    {
+        $configs = require __DIR__ . '/Config/Config.php';
+        return $configs[$key];
+    }
+}

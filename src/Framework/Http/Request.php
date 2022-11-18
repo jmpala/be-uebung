@@ -38,4 +38,9 @@ class Request
     {
         return isset($this->uriParams[$key]);
     }
+
+    public function getParam(string $key): mixed
+    {
+        return $this->uriParams[$key];
+    }
 }

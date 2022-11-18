@@ -11,44 +11,43 @@ class Router
     /**
      * @var array [string 'method:uri' => class|closure runner implements Runnable, ...]
      */
-    protected array $runners = [];
+    protected array $routeHandlers = [];
 
     public function __construct(){}
 
-    public function register(string $methodUri, Controller|\Closure $runner): void
+    public function register(string $methodUri, Controller|\Closure $handler): void
     {
-        $this->runners[$methodUri] = $runner;
+        $this->routeHandlers[$methodUri] = $handler;
     }
 
     public function isRegistered(string $methodUri): bool
     {
-        return isset($this->runners[$methodUri]);
+        return isset($this->routeHandlers[$methodUri]);
     }
 
     public function resolve(Request $request): Response {
         $methodUri = $this->buildMethodUriString($request->method(), $request->uri());
-
-        if (!isset($this->runners[$methodUri])) {
-            throw new \InvalidArgumentException('the method:uri given is not registered');
-        }
-
         $mask = $this->retrieveMask($methodUri);
+
         if ($this->maskHasParameters($mask)) {
             [$key, $value] = $this->extractParameters($methodUri, $mask);
             $request->addParam($key, $value);
         }
 
-        if ($this->runners[$methodUri] instanceof Controller) {
-            return $this->runners[$methodUri]->handle($request);
+        if (!isset($this->routeHandlers[$mask])) {
+            throw new \InvalidArgumentException('the method:uri given is not registered');
         }
 
-        if ($this->runners[$methodUri] instanceof \Closure) {
-            return $this->runners[$methodUri]($request);
+        if ($this->routeHandlers[$mask] instanceof Controller) {
+            return $this->routeHandlers[$mask]->handle($request);
         }
 
+        if ($this->routeHandlers[$mask] instanceof \Closure) {
+            return $this->routeHandlers[$mask]($request);
+        }
     }
 
-    // TODO: refactor the two places where is used in this class, prone to errors
+    // TODO: refactor the two places where is used in this class, prone to errors2
     private function maskHasParameters(string $mask): bool
     {
         return 1 === preg_match('#{([?]?)([^}]*)}#', $mask, $matchedKey);
@@ -72,12 +71,25 @@ class Router
 
     public function buildMethodUriString(string $method, string $uri): string
     {
+        if ($this->isStaticFileRequest($uri)) {
+            return "staticFile:{$uri}";
+        }
+
         return $method.':'.$uri;
+    }
+
+    public function isStaticFileRequest(string $uri): bool
+    {
+        $extensions = configs('static_files.supported_extensions');
+        $extensions = implode('|', $extensions);
+        $regex = "#\.({$extensions})$#";
+        $res = preg_match($regex, $uri);
+        return !($res === false || $res === 0);
     }
 
     public function retrieveMask(string $methodUri): string|\InvalidArgumentException
     {
-        foreach ($this->runners as $mask => $runner) {
+        foreach ($this->routeHandlers as $mask => $runner) {
             if ($this->match($methodUri, $mask)) {
                 return $mask;
             }
