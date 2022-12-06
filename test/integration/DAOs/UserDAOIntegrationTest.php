@@ -34,10 +34,9 @@ class UserDAOIntegrationTest extends TestCase
     {
         $user = UserDAO::selectById(1);
         $user['password'] = random_int(10000000, 99999999);
-        $lastChange = $user['last_changed_at'];
         UserDAO::update($user);
-        $user = UserDAO::selectById(1);
-        self::assertNotEquals($lastChange, $user['last_changed_at']);
+        $res = UserDAO::selectById(1);
+        self::assertEquals($user['password'], $res['password']);
     }
 
     public function testisCreatedAndDeleteUser(): void
@@ -51,5 +50,18 @@ class UserDAOIntegrationTest extends TestCase
         self::assertTrue(UserDAO::isCreated($id));
         USERDAO::deleteById($id);
         self::assertFalse(UserDAO::isCreated($id));
+    }
+
+    public function testSelectUserByEmail(): void
+    {
+        $user = [
+            'name' => 'testUser',
+            'password' => 'testUser',
+            'email' => 'email@email.com'
+        ];
+        $id = UserDAO::insert($user);
+        $res = UserDAO::selectByEmail($user['email']);
+        self::assertNotNull($user);
+        self::assertEquals($user['email'], $res['email']);
     }
 }

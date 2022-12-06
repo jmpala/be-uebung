@@ -22,6 +22,16 @@ class UserDAO implements DAO
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public static function selectByEmail(string $email): array | bool
+    {
+        $conn = dbconn();
+        $query = "SELECT * FROM " . self::getTable() . " WHERE email = :email;";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('email', $email, \PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
     public static function selectAll(): array
     {
         $conn = dbconn();
