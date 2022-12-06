@@ -31,7 +31,7 @@ class Router
 
         if ($this->maskHasParameters($mask)) {
             [$key, $value] = $this->extractParameters($methodUri, $mask);
-            $request->addParam($key, $value);
+            $request->addURIParam($key, $value);
         }
 
         if (!isset($this->routeHandlers[$mask])) {

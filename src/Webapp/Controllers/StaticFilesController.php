@@ -18,7 +18,7 @@ class StaticFilesController implements Controller
 
         header('Content-Type: application/javascript; charset=UTF-8');
         $path = __DIR__ . '/../../../resources/static/';
-        $file = $request->getParam('file');
+        $file = $request->getURIParam('file');
         $res->content(readfile("{$path}{$file}"));
 
         return $res;

@@ -5,6 +5,7 @@ namespace Framework\Http;
 class Request
 {
     protected array $uriParams = [];
+    protected array $postParams = [];
 
     protected string $method;
     protected string $uri;
@@ -29,18 +30,33 @@ class Request
         return $this;
     }
 
-    public function addParam(string $key, string $value): void
+    public function addURIParam(string $key, string $value): void
     {
         $this->uriParams[$key] = $value;
     }
 
-    public function existParam(string $key): bool
+    public function existURIParam(string $key): bool
     {
         return isset($this->uriParams[$key]);
     }
 
-    public function getParam(string $key): mixed
+    public function getURIParam(string $key): mixed
     {
         return $this->uriParams[$key];
+    }
+
+    public function addPostParam(string $key, string $value): void
+    {
+        $this->postParams[$key] = $value;
+    }
+
+    public function existPostParam(string $key): bool
+    {
+        return isset($this->postParams[$key]);
+    }
+
+    public function getPostParam(string $key): mixed
+    {
+        return $this->postParams[$key];
     }
 }

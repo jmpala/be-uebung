@@ -97,6 +97,12 @@ class App
         $request = \container(Request::class);
         $request->method($_SERVER['REQUEST_METHOD']);
         $request->uri($_SERVER['REQUEST_URI']);
+
+        if (!empty($_POST)) {
+            foreach ($_POST as $key => $value) {
+                $request->addPostParam($key, $value);
+            }
+        }
     }
 
     private function handleResponse(Response $response): string
