@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+echo "Running phpunit tests"
+echo "---------------------"
+echo "Please select a testsuite to run:"
+echo "1) Unit tests"
+echo "2) Integration tests"
+
+read -p "Enter your choice: " choice
+
+case "$choice" in
+  1) echo "Running unit tests"
+     vendor/bin/phpunit --testsuite unit
+     ;;
+  2) echo "Running integration tests"
+     vendor/bin/phpunit --testsuite integration
+     ;;
+  *) echo "Invalid choice"
+     ;;
+esac
