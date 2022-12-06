@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# run all sql scripts from directory
+for f in /var/www/html/migrations/*.sql
+do
+  echo "Running $f file..."
+  mysql --user=root --password=root -P 3306 < "$f"
+done
