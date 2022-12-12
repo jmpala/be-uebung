@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Framework\Router;
+namespace Unit\Framework\Router;
 
 use Framework\Contracts\Controller;
 use Framework\Http\Request;

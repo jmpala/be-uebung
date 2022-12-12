@@ -10,7 +10,7 @@ read -p "Enter your choice: " choice
 
 case "$choice" in
   1) echo "Running unit tests"
-     vendor/bin/phpunit --testsuite unit
+     vendor/bin/phpunit --testsuite Unit
      ;;
   2) echo "Running integration tests"
      vendor/bin/phpunit --testsuite integration

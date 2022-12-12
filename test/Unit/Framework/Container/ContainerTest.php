@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Framework\Container;
+namespace Unit\Framework\Container;
 
 use Framework\Container\Container;
 use Framework\Router\Router;

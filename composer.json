@@ -2,7 +2,8 @@
     "autoload": {
         "psr-4": {
             "Framework\\": "src/Framework",
-            "Webapp\\": "src/Webapp"
+            "Webapp\\": "src/Webapp",
+            "Unit\\": "test/Unit"
         },
         "files": [
             "src/Framework/helper.php"

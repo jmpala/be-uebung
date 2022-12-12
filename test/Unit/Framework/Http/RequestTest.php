@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Framework\Http;
+namespace Unit\Framework\Http;
 
 use Framework\Http\Request;
 

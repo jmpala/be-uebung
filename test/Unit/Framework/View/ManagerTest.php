@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Framework\View;
+namespace Unit\Framework\View;
 
 use Framework\Contracts\ViewHandler;
 use Framework\Contracts\ViewHandlerProvider;

@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Framework\View\Handlers;
+namespace Unit\Framework\View\Handlers;
 
 use Framework\View\Handlers\SimplePhpViewHandler;
 use PHPUnit\Framework\TestCase;
