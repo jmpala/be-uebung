@@ -35,12 +35,13 @@ class AuthenticationMidd extends AbstractHandler
     {
         if (time() - $sessionManager->get(SessionManager::LAST_REQUEST_TIMESTAMP) > $this->secondsBeforeSessionExpire) {
             $sessionManager->logOut();
+            redirect('/login');
         }
     }
 
     private function regenerateSessionId(SessionManager $sessionManager): void
     {
-        if (time() - $sessionManager->get(SessionManager::LAST_REQUEST_TIMESTAMP) > $this->secondsBeforeIdRegen) {
+        if ($sessionManager->isLoggedIn() && time() - $sessionManager->get(SessionManager::LAST_REQUEST_TIMESTAMP) > $this->secondsBeforeIdRegen) {
             $sessionManager->logIn();
         }
     }

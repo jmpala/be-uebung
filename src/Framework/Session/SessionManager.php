@@ -31,8 +31,16 @@ class SessionManager
     public function logOut(): void
     {
         $this->add(self::LOGGED_IN, false);
-        session_destroy();
 
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
+        session_destroy();
     }
 
     public function isLoggedIn(): bool
