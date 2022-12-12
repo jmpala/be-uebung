@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login Page</title>
-<script defer src="login.5fa5d8d69c48333a6195.js"></script></head>
+<script defer src="/dist/js/login.5fa5d8d69c48333a6195.js"></script></head>
 <body>
 
 <main>
