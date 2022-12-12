@@ -1,6 +1,6 @@
 <?php
 
-return [
+return [ // TODO: change to env variables or properties
     // START DATABASE
     'database.host' => 'ddev-be-uebung-db',
     'database.port' => '3306',
