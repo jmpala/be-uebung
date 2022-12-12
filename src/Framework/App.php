@@ -13,13 +13,13 @@ class App
 {
     private static ?App $instance = null;
 
-    public const CONFIG_PATH  = __DIR__ . '/Config/';
-    public const CONFIG_FRAMEWORK_DI_KEY = 'CONFIG_DI';
-    private const CONFIG_FRAMEWORK_DI_FILE = 'DIInstancesConf';
-    public const CONFIG_FRAMEWORK_DB_KEY = 'CONFIG_DB';
-    private const CONFIG_FRAMEWORK_DB_FILE = 'DBConf';
-    private const CONFIG_FRAMEWORK_CONTROLLERS_FILE = 'RegisterControllers';
-    private const CONFIG_FRAMEWORK_MIDDLEWARE_FILE = 'MiddlewareHandlersConfig';
+    public CONST CONFIG_PATH  = __DIR__ . '/Config/';
+    public CONST CONFIG_FRAMEWORK_DI_KEY = 'CONFIG_DI';
+    private CONST CONFIG_FRAMEWORK_DI_FILE = 'DIInstancesConf';
+    public CONST CONFIG_FRAMEWORK_DB_KEY = 'CONFIG_DB';
+    private CONST CONFIG_FRAMEWORK_DB_FILE = 'DBConf';
+    private CONST CONFIG_FRAMEWORK_CONTROLLERS_FILE = 'RegisterControllers';
+    private CONST CONFIG_FRAMEWORK_MIDDLEWARE_FILE = 'MiddlewareHandlersConfig';
 
     private array $appConf = [];
 
@@ -39,6 +39,8 @@ class App
 
     public function run():string
     {
+        session_start();
+
         $this->boostrap();
 
         $request = container(Request::class);
