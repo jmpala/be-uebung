@@ -4,6 +4,7 @@ namespace Framework;
 
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Middleware\Middleware;
 use Framework\Providers\ViewHandlersProvider;
 use Framework\Router\Router;
 use Framework\View\Manager;
@@ -18,6 +19,7 @@ class App
     public const CONFIG_FRAMEWORK_DB_KEY = 'CONFIG_DB';
     private const CONFIG_FRAMEWORK_DB_FILE = 'DBConf';
     private const CONFIG_FRAMEWORK_CONTROLLERS_FILE = 'RegisterControllers';
+    private const CONFIG_FRAMEWORK_MIDDLEWARE_FILE = 'MiddlewareHandlersConfig';
 
     private array $appConf = [];
 
@@ -42,6 +44,9 @@ class App
         $request = container(Request::class);
         $router = container(Router::class);
 
+        $middleware = container(Middleware::class);
+        $request = $middleware->run($request);
+
         $response =  $router->resolve($request);
         return $this->handleResponse($response);
     }
@@ -53,6 +58,7 @@ class App
         $this->addProvidersToManagers();
         $this->registerControllers();
         $this->createRequest();
+        $this->registerMiddlewares();
     }
 
     private function loadAppConfiguration(): void
@@ -108,5 +114,17 @@ class App
     private function handleResponse(Response $response): string
     {
         return $response->content();
+    }
+
+    private function registerMiddlewares(): void
+    {
+        $path = self::CONFIG_PATH . self::CONFIG_FRAMEWORK_MIDDLEWARE_FILE . '.php';
+        $data = require $path;
+
+        $middleware = \container(Middleware::class);
+
+        foreach ($data as $handler) {
+            $middleware->pipe(new $handler);
+        }
     }
 }

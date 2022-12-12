@@ -8,4 +8,5 @@ return [
     \Framework\Http\Response::class,
     \Framework\Router\Router::class,
     \Framework\View\Manager::class,
+    \Framework\Middleware\Middleware::class
 ];
