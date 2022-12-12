@@ -12,4 +12,5 @@ class AuthenticationMiddTest extends TestCase
         $authenticationMidd = new AuthenticationMidd();
         $this->assertNotNull($authenticationMidd);
     }
+
 }
