@@ -1,0 +1,10 @@
+CREATE TABLE `desksharing_dev`.`bookings` (
+    id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES `desksharing_dev`.`users`(id)
+) ENGINE = InnoDB;
