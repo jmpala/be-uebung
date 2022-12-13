@@ -1,3 +1,10 @@
+<?php
+
+use Framework\Session\SessionManager;
+
+$role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,15 +28,21 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="true" href="#">Overview</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bookings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Planning</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Admin</a>
-                </li>
+                <?php if ($role === "usr" || $role === "tml" || $role === "adm") : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bookings</a>
+                    </li>
+                <?php endif; ?>
+                <?php if ($role === "tml" || $role === "adm") : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Planning</a>
+                    </li>
+                <?php endif; ?>
+                <?php if ($role === "adm") : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Admin</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>

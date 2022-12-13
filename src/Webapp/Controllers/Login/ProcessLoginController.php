@@ -3,6 +3,7 @@
 namespace Webapp\Controllers\Login;
 
 use Framework\Contracts\Controller;
+use Framework\DAOs\RoleDAO;
 use Framework\DAOs\UserDAO;
 use Framework\Http\Request;
 use Framework\Http\Response;
@@ -23,6 +24,9 @@ class ProcessLoginController implements Controller
         $sessionManager = container(SessionManager::class);
         $sessionManager->logIn();
         $sessionManager->add(SessionManager::USER_ID, $user['id']);
+
+        $role = RoleDAO::selectById($user['role_id']);
+        $sessionManager->add(SessionManager::USER_ROLE, $role['code']);
 
         return redirect('/overview');
     }
