@@ -2,6 +2,7 @@
 
 namespace Framework\Session;
 
+// TODO: implement a commit method that will save the session data to the session storage
 class SessionManager
 {
     public CONST LOGGED_IN = 'logged_in';
