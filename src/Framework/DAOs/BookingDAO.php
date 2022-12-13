@@ -93,4 +93,26 @@ class BookingDAO implements DAO
         $res = $stmt->fetch(\PDO::FETCH_NUM)[0];
         return $res !== "0";
     }
+
+    public static function getBookingsForUser($userId, mixed $page)
+    {
+        $conn = dbconn();
+        $query = "SELECT * FROM " . self::getTable() . " WHERE user_id = :user_id LIMIT :limit OFFSET :offset;";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('user_id', $userId, \PDO::PARAM_INT);
+        $stmt->bindValue('limit', configs('pagination.bookings_per_page'), \PDO::PARAM_INT);
+        $stmt->bindValue('offset', ($page - 1) * configs('pagination.bookings_per_page'), \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getTotalBookingsForUser($userId)
+    {
+        $conn = dbconn();
+        $query = "SELECT COUNT(*) FROM " . self::getTable() . " WHERE user_id = :user_id;";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('user_id', $userId, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_NUM)[0];
+    }
 }

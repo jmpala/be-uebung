@@ -22,7 +22,7 @@ class ProcessLoginController implements Controller
 
         $sessionManager = container(SessionManager::class);
         $sessionManager->logIn();
-        $sessionManager->add($user['id'], $user);
+        $sessionManager->add(SessionManager::USER_ID, $user['id']);
 
         return redirect('/overview');
     }

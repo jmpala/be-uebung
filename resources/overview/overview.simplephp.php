@@ -81,75 +81,42 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr data-booking-id="0">
-                            <th>Desk-1</th>
-                            <th>01.01.1990</th>
-                            <th>123456789</th>
-                            <th>
-                                <a class="btn btn-primary btn-edit" href="#0">Edit</a>
-                                <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
-                            </th>
-                        </tr>
-                        <tr data-booking-id="1">
-                            <th>Desk-1</th>
-                            <th>01.01.1990 - 01.01.1990</th>
-                            <th>123456789</th>
-                            <th>
-                                <a class="btn btn-primary btn-edit" href="#1">Edit</a>
-                                <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
-                            </th>
-                        </tr>
-                        <tr data-booking-id="2">
-                            <th>Desk-1</th>
-                            <th>01.01.1990</th>
-                            <th>123456789</th>
-                            <th>
-                                <a class="btn btn-primary btn-edit" href="#2">Edit</a>
-                                <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
-                            </th>
-                        </tr>
-                        <tr data-booking-id="3">
-                            <th>Desk-1</th>
-                            <th>01.01.1990 - 01.01.1990</th>
-                            <th>123456789</th>
-                            <th>
-                                <a class="btn btn-primary btn-edit" href="#3">Edit</a>
-                                <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
-                            </th>
-                        </tr>
-                        <tr data-booking-id="4">
-                            <th>Desk-1</th>
-                            <th>01.01.1990</th>
-                            <th>123456789</th>
-                            <th>
-                                <a class="btn btn-primary btn-edit" href="#4">Edit</a>
-                                <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
-                            </th>
-                        </tr>
-                        <tr data-booking-id="5">
-                            <th>Desk-1</th>
-                            <th>01.01.1990</th>
-                            <th>123456789</th>
-                            <th>
-                                <a class="btn btn-primary btn-edit" href="#5">Edit</a>
-                                <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
-                            </th>
-                        </tr>
+e                        <?php if (empty($bookings)) : ?>
+                            <tr>
+                                <td colspan="4">No bookings found</td>
+                            </tr>
+                        <?php else: ?>
+                            <?php foreach ($bookings as $booking) : ?>
+                                <tr data-booking-id="0">
+                                    <th>Desk-1</th>
+                                    <th><?= $booking['start_date'] ?> - <?= $booking['end_date'] ?></th>
+                                    <th>123456789</th>
+                                    <th>
+                                        <a class="btn btn-primary btn-edit" href="#0">Edit</a>
+                                        <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
+                                    </th>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="row">
-            <nav aria-label="existing bookings pagination">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-        </div>
+        <?php if ($totalPages > 1) : ?>
+            <div class="row">
+                <nav aria-label="existing bookings pagination">
+                    <ul class="pagination justify-content-center">
+                        <?php if ($previousPage) : ?>
+                            <li class="page-item"><a class="page-link" href="/overview/<?= $previousPage ?>">Previous</a></li>
+                        <?php endif; ?>
+                        <li class="page-item active"><a class="page-link" href="#"><?= $currentPage ?></a></li>
+                        <?php if ($nextPage) : ?>
+                            <li class="page-item"><a class="page-link" href="/overview/<?= $nextPage ?>">Next</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 

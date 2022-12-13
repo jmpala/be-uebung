@@ -12,4 +12,8 @@ return [ // TODO: change to env variables or properties
     // START STATIC FILES
     'static_files.supported_extensions' => ['js', 'css', 'png', 'jpg'],
     // END STATIC FILES
+
+    // PAGINATION
+    'pagination.bookings_per_page' => 5,
+    // END PAGINATION
 ];

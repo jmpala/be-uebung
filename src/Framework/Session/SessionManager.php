@@ -6,6 +6,7 @@ namespace Framework\Session;
 class SessionManager
 {
     public CONST LOGGED_IN = 'logged_in';
+    public CONST USER_ID = 'user_id';
     public CONST LAST_REQUEST_TIMESTAMP = 'last_request_timestamp';
 
     public function add(string $key, $value): void
