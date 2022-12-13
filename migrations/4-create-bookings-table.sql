@@ -5,6 +5,5 @@ CREATE TABLE `desksharing_dev`.`bookings` (
     end_date DATETIME NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES `desksharing_dev`.`users`(id)
+    PRIMARY KEY (id)
 ) ENGINE = InnoDB;
