@@ -5,4 +5,4 @@ VALUES ('User One', 'user1@user.com', '$2y$10$xRZ52HFAI5e.K8exVjYM7OVZ8adPGT7/Gb
 ('User Four', 'user4@user.com', '$2y$10$RO1nQhjcXnWaSVWy1SjwN.6xTbOIHedB5Gzp6zeoGHvPQRAHjAVKW', 1),
 ('TL One', 'tl1@user.com', '$2y$10$RO1nQhjcXnWaSVWy1SjwN.6xTbOIHedB5Gzp6zeoGHvPQRAHjAVKW', 2),
 ('TL Two', 'tl2@user.com', '$2y$10$RO1nQhjcXnWaSVWy1SjwN.6xTbOIHedB5Gzp6zeoGHvPQRAHjAVKW', 2),
-('Admin Admin', 'admin@user.com', '$2y$10$RO    1nQhjcXnWaSVWy1SjwN.6xTbOIHedB5Gzp6zeoGHvPQRAHjAVKW', 3);
+('Admin Admin', 'admin@user.com', '$2y$10$RO1nQhjcXnWaSVWy1SjwN.6xTbOIHedB5Gzp6zeoGHvPQRAHjAVKW', 3);
