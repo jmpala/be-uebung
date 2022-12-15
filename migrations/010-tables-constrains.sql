@@ -12,3 +12,9 @@ ALTER TABLE `desksharing_dev`.`bookings`
         ON DELETE NO ACTION
         ON UPDATE NO ACTION;
 
+ALTER TABLE `desksharing_dev`.`bookings`
+    ADD CONSTRAINT fk_booking_desk
+    FOREIGN KEY (desk_id)
+        REFERENCES `desksharing_dev`.`desks`(id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION;

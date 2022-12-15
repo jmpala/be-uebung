@@ -1,6 +1,7 @@
 CREATE TABLE `desksharing_dev`.`bookings` (
     id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
+    desk_id INT NOT NULL,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
