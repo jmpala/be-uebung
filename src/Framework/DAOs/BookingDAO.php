@@ -115,4 +115,23 @@ class BookingDAO implements DAO
         $stmt->execute();
         return $stmt->fetch(\PDO::FETCH_NUM)[0];
     }
+
+    public static function getTodayBookedDesks(): array
+    {
+        return self::getBookedDesksForDate(new \DateTime());
+    }
+
+    public static function getBookedDesksForDate(\DateTime $date): array
+    {
+        $conn = dbconn();
+        $query = "SELECT desks.code, bookings.user_id, bookings.start_date, bookings.end_date  FROM desks
+                    INNER JOIN bookings
+                    ON desks.id = bookings.desk_id
+                    WHERE :date BETWEEN bookings.start_date AND bookings.end_date  
+                    ORDER BY `desks`.`code` ASC";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('date', $date->format('Y-m-d'));
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
