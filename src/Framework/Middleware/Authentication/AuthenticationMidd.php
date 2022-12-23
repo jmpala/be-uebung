@@ -11,14 +11,19 @@ use Framework\Session\SessionManager;
 
 class AuthenticationMidd extends AbstractHandler
 {
-    // TODO: send to config file
-    private int $secondsBeforeIdRegen = 300;
-    private int $secondsBeforeSessionExpire = 360;
+    private int $secondsBeforeIdRegen;
+    private int $secondsBeforeSessionExpire;
 
     private array $publicRoutes = [
         '/login',
         '/api/login',
     ];
+
+    public function __construct()
+    {
+        $this->secondsBeforeIdRegen = configs('middleware.authentication.sec_regenerate_session');
+        $this->secondsBeforeSessionExpire = configs('middleware.authentication.sec_expire_session');
+    }
 
     protected function process(Request $request): Request
     {

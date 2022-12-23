@@ -22,4 +22,9 @@ return [ // TODO: change to env variables or properties
     'webapp.jwt_secret' => 'test_123',
     'webapp.jwt_encoding' => 'HS256',
     // END WEBAPP
+
+    // MIDDLEWARE
+    'middleware.authentication.sec_regenerate_session' => '300',
+    'middleware.authentication.sec_expire_session' => '360',
+    // END MIDDLEWARE
 ];
