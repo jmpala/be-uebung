@@ -8,11 +8,20 @@ use Framework\Session\SessionManager;
 
 class ShowLoginPageController implements \Framework\Contracts\Controller
 {
+    private SessionManager $sessionManager;
+    private Response $response;
+
+    public function __construct()
+    {
+        $this->sessionManager = container(SessionManager::class);
+        $this->response = container(Response::class);
+    }
+
     public function handle(Request $request): Response
     {
-        $sessionManager = container(SessionManager::class);
+        $this->response->statusCode(200);
 
-        if ($sessionManager->isLoggedIn()) {
+        if ($this->sessionManager->isLoggedIn()) {
             return redirect('/overview');
         }
 

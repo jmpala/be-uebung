@@ -6,13 +6,24 @@ use Framework\Contracts\Controller;
 use Framework\DAOs\BookingDAO;
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Services\BookingService;
 use Framework\Session\SessionManager;
 
 class ShowOverviewPageController implements Controller
 {
+    private BookingService $bookingService;
+    private Response $response;
+
+    public function __construct()
+    {
+        $this->bookingService = container(BookingService::class);
+        $this->response = container(Response::class);
+    }
 
     public function handle(Request $request): Response
     {
+        $this->response->statusCode(200);
+
         if ($request->existURIParam('page')) {
             $currentPage = $request->getURIParam('page');
         } else {

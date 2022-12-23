@@ -9,4 +9,5 @@ return [
     'GET:/overview' => \Webapp\Controllers\Overview\ShowOverviewPageController::class,
     'GET:/overview/{?page}' => \Webapp\Controllers\Overview\ShowOverviewPageController::class,
     'staticFile:/{file}' => \Webapp\Controllers\StaticFilesController::class,
+    'GET:/api/desks' => \Webapp\Controllers\SampleRestGETController::class,
 ];

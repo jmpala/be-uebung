@@ -13,6 +13,7 @@
         "phpunit/phpunit": "^9"
     },
   "require": {
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+        "firebase/php-jwt": "^6.3"
   }
 }

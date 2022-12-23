@@ -115,6 +115,14 @@ class App
 
     private function handleResponse(Response $response): string
     {
+        header("HTTP/1.1 {$response->statusCode()} {$response->statusCodeMessage()}");
+
+        if (!empty($response->headers())) {
+            foreach ($response->headers() as $key => $value) {
+                header("{$key}: {$value}");
+            }
+        }
+
         return $response->content();
     }
 

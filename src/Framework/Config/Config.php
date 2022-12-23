@@ -16,4 +16,10 @@ return [ // TODO: change to env variables or properties
     // PAGINATION
     'pagination.bookings_per_page' => 5,
     // END PAGINATION
+
+    // START WEBAPP
+    'webapp.rest_endpoint' => 'api',
+    'webapp.jwt_secret' => 'test_123',
+    'webapp.jwt_encoding' => 'HS256',
+    // END WEBAPP
 ];

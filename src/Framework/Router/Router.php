@@ -65,7 +65,7 @@ class Router
         preg_match($matchUriParam, $uri, $matchedValue);
 
         $key = $matchedKey[2];
-        $value = $matchedValue[1];
+        $value = $matchedValue[1] ?? "";
         return [$key, $value];
     }
 
@@ -101,6 +101,7 @@ class Router
     {
         if ($this->maskHasParameters($mask)) {
             [$key, $value] = $this->extractParameters($methodUri, $mask);
+
             $mask = $this->maskToUriMethod($mask, $key, $value);
         }
         return $methodUri === $mask;
@@ -108,7 +109,7 @@ class Router
 
     private function maskToUriMethod(string $mask, string $key, string $value): string
     {
-        return preg_replace('#{([^}]*)}#', $value, $mask);
+        return preg_replace('#{([?' . $key. '^}]*)}#', $value, $mask);
     }
 
     // TODO: delete?

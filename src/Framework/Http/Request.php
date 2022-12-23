@@ -10,6 +10,9 @@ class Request
     protected string $method;
     protected string $uri;
 
+    protected bool $isREST = false;
+    protected string $jwtToken = '';
+
     public function __construct(){}
 
     public function method(string $value = null): string|static
@@ -27,6 +30,24 @@ class Request
             return $this->uri;
         }
         $this->uri = $value;
+        return $this;
+    }
+
+    public function isREST(bool $value = null): bool|static
+    {
+        if (is_null($value)) {
+            return $this->isREST;
+        }
+        $this->isREST = $value;
+        return $this;
+    }
+
+    public function jwtToken(string $value = null): string|static
+    {
+        if (is_null($value)) {
+            return $this->jwtToken;
+        }
+        $this->jwtToken = $value;
         return $this;
     }
 

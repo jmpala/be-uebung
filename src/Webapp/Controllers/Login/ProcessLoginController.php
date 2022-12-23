@@ -11,9 +11,17 @@ use Framework\Session\SessionManager;
 
 class ProcessLoginController implements Controller
 {
+    private Response $response;
+
+    public function __construct()
+    {
+        $this->response = container(Response::class);
+    }
 
     public function handle(Request $request): Response
     {
+        $this->response->statusCode(200);
+
         $email = $request->getPostParam('email');
         $user = UserDAO::selectByEmail($email);
 

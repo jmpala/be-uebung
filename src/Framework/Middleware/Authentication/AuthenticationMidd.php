@@ -2,6 +2,8 @@
 
 namespace Framework\Middleware\Authentication;
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Framework\Http\Request;
 use Framework\Middleware\AbstractHandler;
 use Framework\Session\SessionManager;
@@ -14,12 +16,23 @@ class AuthenticationMidd extends AbstractHandler
     private int $secondsBeforeSessionExpire = 360;
 
     private array $publicRoutes = [
-        '/login'
+        '/login',
+        '/api/login',
     ];
 
     protected function process(Request $request): Request
     {
         $sessionManager = container(SessionManager::class);
+
+        if (in_array($request->uri(), $this->publicRoutes)) {
+            return $request;
+        }
+
+        $this->checkIfRequestIsREST($request);
+        if ($request->isREST()) {
+            $this->checkIfValidJWT($request);
+            return $request;
+        }
 
         $this->checkIfLoggedIn($sessionManager, $request);
         $this->checkTimestampOrCreate($sessionManager);
@@ -60,6 +73,19 @@ class AuthenticationMidd extends AbstractHandler
         if ($sessionManager->isLoggedIn() && time() - $sessionManager->get(SessionManager::LAST_REQUEST_TIMESTAMP) > $this->secondsBeforeIdRegen) {
             $sessionManager->logIn();
         }
+    }
+
+    private function checkIfRequestIsREST(Request $request)
+    {
+        $uri = $request->uri();
+        $isREST = preg_match('#′/api/#', $uri) === 1;
+        $request->isREST($isREST);
+    }
+
+    private function checkIfValidJWT(Request $request)
+    {
+        $jwt_token = $request->jwtToken();
+        JWT::decode($jwt_token, new Key(configs('webapp.jwt_secret'), configs('webapp.jwt_encoding')));
     }
 
 }
