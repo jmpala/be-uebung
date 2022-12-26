@@ -3,6 +3,7 @@
         "psr-4": {
             "Framework\\": "src/Framework",
             "Webapp\\": "src/Webapp",
+            "RESTapi\\": "src/RESTapi",
             "Unit\\": "test/Unit"
         },
         "files": [

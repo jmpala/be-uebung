@@ -23,6 +23,15 @@ return [ // TODO: change to env variables or properties
     'webapp.jwt_encoding' => 'HS256',
     // END WEBAPP
 
+    // START REST api
+    'restapi.payload.iss' => 'http://localhost:8080',
+    'restapi.payload.aud' => 'http://localhost:8080',
+    'restapi.payload.iat' => time(),
+    'restapi.payload.exp' => time() + 60 * 60,
+    'restapi.secret.key' => 'testsecretkey',
+    'restapi.cypher.algorithm' => 'HS256',
+    // END REST api
+
     // MIDDLEWARE
     'middleware.authentication.sec_regenerate_session' => '300',
     'middleware.authentication.sec_expire_session' => '360',
