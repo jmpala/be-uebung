@@ -1,6 +1,7 @@
 <?php
 
 return [
+    // Webapp
     'GET:/' => \Webapp\Controllers\SampleController::class,
     'POST:/' => \Webapp\Controllers\SampleProcessController::class,
     'GET:/login' => \Webapp\Controllers\Login\ShowLoginPageController::class,
@@ -9,5 +10,7 @@ return [
     'GET:/overview' => \Webapp\Controllers\Overview\ShowOverviewPageController::class,
     'GET:/overview/{?page}' => \Webapp\Controllers\Overview\ShowOverviewPageController::class,
     'staticFile:/{file}' => \Webapp\Controllers\StaticFilesController::class,
-    'GET:/api/desks' => \Webapp\Controllers\SampleRestGETController::class,
+
+    // REST API
+    'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
 ];
