@@ -111,6 +111,14 @@ class App
                 $request->addPostParam($key, $value);
             }
         }
+
+        $body = file_get_contents('php://input');
+        if (!empty($body)) {
+            $requestData = json_decode($body, true);
+            foreach ($requestData as $key => $value) {
+                $request->addPostParam($key, $value);
+            }
+        }
     }
 
     private function handleResponse(Response $response): string
