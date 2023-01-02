@@ -124,7 +124,7 @@ class BookingDAO implements DAO
     public static function getBookedDesksForDate(\DateTime $date): array
     {
         $conn = dbconn();
-        $query = "SELECT desks.code, bookings.user_id, bookings.start_date, bookings.end_date  FROM desks
+        $query = "SELECT desks.code, bookings.user_id, bookings.desk_id, bookings.start_date, bookings.end_date  FROM desks
                     INNER JOIN bookings
                     ON desks.id = bookings.desk_id
                     WHERE :date BETWEEN bookings.start_date AND bookings.end_date  

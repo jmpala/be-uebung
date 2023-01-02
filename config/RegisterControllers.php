@@ -13,4 +13,6 @@ return [
 
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
+    'GET:/api/desks/availability' =>  \RESTapi\Controllers\Desks\ProcessGetAvailabilityInformationRESTController::class,
+    'GET:/api/desks/availability/{?date}' =>  \RESTapi\Controllers\Desks\ProcessGetAvailabilityInformationRESTController::class,
 ];

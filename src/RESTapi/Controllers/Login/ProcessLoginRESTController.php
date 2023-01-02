@@ -26,11 +26,11 @@ class ProcessLoginRESTController implements Controller
         $password = $request->getPostParam('password');
         $isLogged = $this->loginService->login($user, $password);
 
-
         $this->response->addHeader('Content-Type', 'application/json');
 
         if ($isLogged) {
-            $token = $this->loginService->generateJWTToken($user);
+            $token = $_COOKIE['jwttoken']; // TODO: refactor in config file
+
             $this->response->statusCode(StatusCode::OK);
             return $this->response->content(json_encode(['token' => $token]));
         }

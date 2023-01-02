@@ -18,6 +18,11 @@ class BookingService
         return $this->bookingDAO->getTodayBookedDesks();
     }
 
+    public function getBookingsByDate(\DateTime $date): array
+    {
+        return $this->bookingDAO->getBookedDesksForDate($date);
+    }
+
     public function getBookings(): array
     {
         throw new \Exception("Not implemented yet");

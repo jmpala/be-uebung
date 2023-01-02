@@ -9,6 +9,7 @@ class SessionManager
     public CONST USER_ID = 'user_id';
     public CONST USER_ROLE = 'user_role';
     public CONST LAST_REQUEST_TIMESTAMP = 'last_request_timestamp';
+    public CONST JWT_TOKEN = 'jwt_token';
 
     public function add(string $key, $value): void
     {

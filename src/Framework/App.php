@@ -112,9 +112,14 @@ class App
             }
         }
 
+        // TODO: Duplicated JWT token, one from Header and other from cookies
         if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             $token = explode(' ', $_SERVER['HTTP_AUTHORIZATION'])[1];
             $request->jwtToken($token);
+        }
+
+        if (isset($_COOKIE['jwttoken'])) {
+            $request->jwtToken($_COOKIE['jwttoken']);
         }
 
         $body = file_get_contents('php://input');

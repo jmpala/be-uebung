@@ -7,14 +7,17 @@ use Framework\DAOs\RoleDAO;
 use Framework\DAOs\UserDAO;
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Services\LoginService;
 use Framework\Session\SessionManager;
 
 class ProcessLoginController implements Controller
 {
+    private LoginService $loginService;
     private Response $response;
 
     public function __construct()
     {
+        $this->loginService = container(LoginService::class);
         $this->response = container(Response::class);
     }
 
@@ -23,18 +26,12 @@ class ProcessLoginController implements Controller
         $this->response->statusCode(200);
 
         $email = $request->getPostParam('email');
-        $user = UserDAO::selectByEmail($email);
+        $password = $request->getPostParam('password');
+        $isLogged = $this->loginService->login($email, $password);
 
-        if (!$user || !password_verify($request->getPostParam('password'), $user['password'])) {
+        if (!$isLogged) {
             return redirect('/login');
         }
-
-        $sessionManager = container(SessionManager::class);
-        $sessionManager->logIn();
-        $sessionManager->add(SessionManager::USER_ID, $user['id']);
-
-        $role = RoleDAO::selectById($user['role_id']);
-        $sessionManager->add(SessionManager::USER_ROLE, $role['code']);
 
         return redirect('/overview');
     }
