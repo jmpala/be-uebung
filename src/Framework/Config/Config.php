@@ -17,12 +17,6 @@ return [ // TODO: change to env variables or properties
     'pagination.bookings_per_page' => 5,
     // END PAGINATION
 
-    // START WEBAPP
-    'webapp.rest_endpoint' => 'api',
-    'webapp.jwt_secret' => 'test_123',
-    'webapp.jwt_encoding' => 'HS256',
-    // END WEBAPP
-
     // START REST api
     'restapi.payload.iss' => 'http://localhost:8080',
     'restapi.payload.aud' => 'http://localhost:8080',

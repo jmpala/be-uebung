@@ -112,6 +112,11 @@ class App
             }
         }
 
+        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            $token = explode(' ', $_SERVER['HTTP_AUTHORIZATION'])[1];
+            $request->jwtToken($token);
+        }
+
         $body = file_get_contents('php://input');
         if (!empty($body)) {
             $requestData = json_decode($body, true);

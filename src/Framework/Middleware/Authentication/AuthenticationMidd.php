@@ -83,14 +83,14 @@ class AuthenticationMidd extends AbstractHandler
     private function checkIfRequestIsREST(Request $request)
     {
         $uri = $request->uri();
-        $isREST = preg_match('#′/api/#', $uri) === 1;
+        $isREST = preg_match('#/api/#', $uri) === 1;
         $request->isREST($isREST);
     }
 
     private function checkIfValidJWT(Request $request)
     {
         $jwt_token = $request->jwtToken();
-        JWT::decode($jwt_token, new Key(configs('webapp.jwt_secret'), configs('webapp.jwt_encoding')));
+        JWT::decode($jwt_token, new Key(configs('restapi.secret.key'), configs('restapi.cypher.algorithm')));
     }
 
 }
