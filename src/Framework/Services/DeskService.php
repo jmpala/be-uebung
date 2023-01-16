@@ -17,4 +17,9 @@ class DeskService
     {
         return $this->desksDAO->selectAll();
     }
+
+    public function getDeskName(int $deskID): string
+    {
+        return $this->desksDAO::selectById($deskID)['code'];
+    }
 }
