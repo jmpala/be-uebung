@@ -122,11 +122,13 @@ class App
             $request->jwtToken($_COOKIE['jwttoken']);
         }
 
-        $body = file_get_contents('php://input');
-        if (!empty($body)) {
-            $requestData = json_decode($body, true);
-            foreach ($requestData as $key => $value) {
-                $request->addPostParam($key, $value);
+        if ($request->isREST()) {
+            $body = file_get_contents('php://input');
+            if (!empty($body)) {
+                $requestData = json_decode($body, true);
+                foreach ($requestData as $key => $value) {
+                    $request->addPostParam($key, $value);
+                }
             }
         }
     }
