@@ -41,7 +41,7 @@ class App
     {
         session_start();
 
-        $this->boostrap();
+        $this->bootstrap();
 
         $request = container(Request::class);
         $router = container(Router::class);
@@ -53,7 +53,7 @@ class App
         return $this->handleResponse($response);
     }
 
-    private function boostrap(): void
+    private function bootstrap(): void
     {
         $this->loadAppConfiguration();
         $this->registerInstancesIntoContainer();
