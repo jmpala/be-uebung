@@ -71,8 +71,12 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
         <div class="row">
             <canvas id="seatmap" class="col-12">Canvas not supported by your browser, please update</canvas>
         </div>
-        <div class="row justify-content-center">
-            <button class="btn btn-primary col-12 col-sm-2 my-4">New Booking</button>
+        <div>
+            <form class="row justify-content-center" action="/" method="POST">
+                <input type="hidden" id="selected-desk" name="selected-desk">
+                <input type="hidden" id="selected-date" name="selected-date">
+                <input class="btn btn-primary col-12 col-sm-2 my-4" id="new-booking" type="submit" value="New Booking">
+            </form>
         </div>
     </div>
 </main>
@@ -94,14 +98,14 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-e                        <?php if (empty($bookings)) : ?>
+                        <?php if (empty($bookings)) : ?>
                             <tr>
                                 <td colspan="4">No bookings found</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($bookings as $booking) : ?>
                                 <tr data-booking-id="0">
-                                    <th>Desk-1</th>
+                                    <th>Desk-<?= $booking['desk_id'] ?></th>
                                     <th><?= $booking['start_date'] ?> - <?= $booking['end_date'] ?></th>
                                     <th>123456789</th>
                                     <th>
