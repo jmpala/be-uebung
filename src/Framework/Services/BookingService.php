@@ -7,10 +7,47 @@ use Framework\DAOs\BookingDAO;
 class BookingService
 {
     private BookingDAO $bookingDAO;
+    private DeskService $deskService;
 
     public function __construct()
     {
         $this->bookingDAO = container(BookingDAO::class);
+        $this->deskService = container(DeskService::class);
+    }
+
+    public function getAvailabilityInformationByDate(\DateTime $date): array
+    {
+        $bookings = $this->getBookingsByDate($date);
+        $desks = $this->deskService->getDesks();
+
+        $availability = [
+            $date->format('Y-m-d') => []
+        ];
+
+        foreach ($desks as $desk) {
+            $availability[$date->format('Y-m-d')][$desk['code']] = [
+                'id' => $desk['id'],
+                'pos' => [
+                    'x' => $desk['pos_x'],
+                    'y' => $desk['pos_y'],
+                ],
+                'size' => [
+                    'w' => $desk['width'],
+                    'h' => $desk['height'],
+                ],
+                'isBooked' => false,
+            ];
+        }
+
+        foreach ($bookings as $booking) {
+            foreach ($availability[$date->format('Y-m-d')] as $key => $desk) {
+                if ($desk['id'] === $booking['desk_id']) {
+                    $availability[$date->format('Y-m-d')][$key]['isBooked'] = true;
+                }
+            }
+        }
+
+        return $availability;
     }
 
     public function getTodayBookedDesks(): array
@@ -23,16 +60,14 @@ class BookingService
         return $this->bookingDAO->getBookedDesksForDate($date);
     }
 
-    public function getBookings(): array
+    public function getBookingsByUserIdPerPage(int $userId, int $page): array
     {
-        throw new \Exception("Not implemented yet");
-        return [];
+        return $this->bookingDAO::getBookingsForUser($userId, $page);
     }
 
-    public function getBooking(int $id): array
+    public function getTotalNumberOfBookingByUserId(int $userId): int
     {
-        throw new \Exception("Not implemented yet");
-        return [];
+        return (int) $this->bookingDAO::getTotalBookingsForUser($userId);
     }
 
     public function createBooking(array $booking): int
