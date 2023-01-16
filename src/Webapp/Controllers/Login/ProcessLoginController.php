@@ -3,12 +3,9 @@
 namespace Webapp\Controllers\Login;
 
 use Framework\Contracts\Controller;
-use Framework\DAOs\RoleDAO;
-use Framework\DAOs\UserDAO;
 use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Services\LoginService;
-use Framework\Session\SessionManager;
 
 class ProcessLoginController implements Controller
 {
