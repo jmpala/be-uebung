@@ -109,7 +109,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                                     <th><?= $booking['start_date'] ?></th>
                                     <th><?= $booking['id'] ?></th>
                                     <th>
-                                        <a class="btn btn-primary btn-edit" href="#0">Edit</a>
+<!--                                        <a class="btn btn-primary btn-edit" href="#0">Edit</a>-->
                                         <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
                                     </th>
                                 </tr>
