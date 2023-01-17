@@ -34,15 +34,17 @@ class BookingDAO implements DAO
     {
         [
             'user_id' => $userId,
+            'desk_id' => $deskId,
             'start_date' => $startDate,
-            'end_date' => $endDate
+            'start_date' => $endDate
         ] = $dao;
         $conn = dbconn();
         $query = "INSERT INTO " . self::getTable() .
-            " (user_id, start_date, end_date)" .
-            " VALUES (:user_id, :start_date, :end_date)";
+            " (user_id, desk_id, start_date, end_date)" .
+            " VALUES (:user_id, :desk_id, :start_date, :end_date)";
         $stmt = $conn->prepare($query);
         $stmt->bindValue('user_id', $userId);
+        $stmt->bindValue('desk_id', $deskId);
         $stmt->bindValue('start_date', $startDate);
         $stmt->bindValue('end_date', $endDate);
         $stmt->execute();

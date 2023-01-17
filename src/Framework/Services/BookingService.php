@@ -72,8 +72,7 @@ class BookingService
 
     public function createBooking(array $booking): int
     {
-        throw new \Exception("Not implemented yet");
-        return 0;
+        return $this->bookingDAO::insert($booking);
     }
 
     public function updateBooking(array $booking): void

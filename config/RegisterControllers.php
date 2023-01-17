@@ -16,7 +16,8 @@ return [
     'GET:/overview/{?page}' => \Webapp\Controllers\Overview\ShowOverviewPageController::class,
 
     // Bookings
-    'POST:/booking/confirmation' => \Webapp\Controllers\Booking\ShowBookingConfirmationController::class,
+    'POST:/booking/confirmation' => \Webapp\Controllers\Booking\ShowBookingConfirmationController::class, // TODO: should this be a GET?
+    'POST:/booking/processNewBooking' => \Webapp\Controllers\Booking\ProcessNewBookingController::class,
 
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
