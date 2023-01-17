@@ -13,7 +13,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="/dist/img/favicon.png">
-    <title>Overview Page</title>
+    <title>Booking Details</title>
     <script defer src="/dist/js/overview.5fa5d8d69c48333a6195.js"></script></head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -26,21 +26,21 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
             <a class="navbar-brand" href="#">LBX Desk Sharing</a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" href="#">Overview</a>
+                    <a class="nav-link active" aria-current="true" href="/overview">Overview</a>
                 </li>
                 <?php if ($role === "usr" || $role === "tml" || $role === "adm") : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Bookings</a>
+                        <a class="nav-link" href="/booking/createBooking">Bookings</a>
                     </li>
                 <?php endif; ?>
                 <?php if ($role === "tml" || $role === "adm") : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Planning</a>
+                        <a class="nav-link" href="/booking/overview">Planning</a>
                     </li>
                 <?php endif; ?>
                 <?php if ($role === "adm") : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Admin</a>
+                        <a class="nav-link" href="/admin">Admin</a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
