@@ -32,7 +32,7 @@ class ProcessNewBookingController implements Controller
         ]);
 
         if ($res) {
-            redirect('/booking/bookingDetails?id=' . $res);
+            redirect('/booking/bookingDetails/' . $res);
         } else {
             redirect('/overview?error=bookingFailed');
         }

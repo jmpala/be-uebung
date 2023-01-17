@@ -70,6 +70,11 @@ class BookingService
         return (int) $this->bookingDAO::getTotalBookingsForUser($userId);
     }
 
+    public function getBookingById(int $id): array
+    {
+        return $this->bookingDAO::selectById($id);
+    }
+
     public function createBooking(array $booking): int
     {
         return $this->bookingDAO::insert($booking);
