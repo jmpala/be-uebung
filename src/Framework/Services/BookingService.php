@@ -87,6 +87,6 @@ class BookingService
 
     public function deleteBooking(int $id): void
     {
-        throw new \Exception("Not implemented yet");
+        $this->bookingDAO::deleteById($id);
     }
 }
