@@ -104,10 +104,10 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                             </tr>
                         <?php else: ?>
                             <?php foreach ($bookings as $booking) : ?>
-                                <tr data-booking-id="0">
-                                    <th>Desk-<?= $booking['desk_id'] ?></th>
-                                    <th><?= $booking['start_date'] ?> - <?= $booking['end_date'] ?></th>
-                                    <th>123456789</th>
+                                <tr data-booking-id="<?= $booking['id'] ?>">
+                                    <th><?= $booking['desk_code'] ?></th>
+                                    <th><?= $booking['start_date'] ?></th>
+                                    <th><?= $booking['id'] ?></th>
                                     <th>
                                         <a class="btn btn-primary btn-edit" href="#0">Edit</a>
                                         <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookingModal">Delete</button>
@@ -150,7 +150,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete User ID: <span class="modal-label-id">#</span></h5>
+                <h5 class="modal-title">Delete Booking ID: <span class="modal-label-id">#</span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
             <div class="modal-body">

@@ -99,7 +99,13 @@ class BookingDAO implements DAO
     public static function getBookingsForUser($userId, mixed $page)
     {
         $conn = dbconn();
-        $query = "SELECT * FROM " . self::getTable() . " WHERE user_id = :user_id LIMIT :limit OFFSET :offset;";
+        $query = "SELECT b.id, b.user_id, b.start_date, b.end_date, b.created_at, b.updated_at, d.id as desk_id, d.code as desk_code
+            FROM " . self::getTable() . " as b 
+            INNER JOIN " . DesksDAO::getTable() . " as d 
+            ON b.desk_id = d.id 
+            WHERE b.user_id = :user_id
+            LIMIT :limit
+            OFFSET :offset;";
         $stmt = $conn->prepare($query);
         $stmt->bindValue('user_id', $userId, \PDO::PARAM_INT);
         $stmt->bindValue('limit', configs('pagination.bookings_per_page'), \PDO::PARAM_INT);
