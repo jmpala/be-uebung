@@ -73,8 +73,8 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
         </div>
         <div>
             <form class="row justify-content-center" action="/booking/confirmation" method="POST">
-                <input type="hidden" id="selected-desk" name="selected-desk">
-                <input type="hidden" id="selected-date" name="selected-date">
+                <input type="hidden" id="selected-desk" name="selected-desk" value="">
+                <input type="hidden" id="selected-date" name="selected-date" value="">
                 <input class="btn btn-primary col-12 col-sm-2 my-4" id="new-booking" type="submit" value="New Booking">
             </form>
         </div>
