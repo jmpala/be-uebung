@@ -73,8 +73,8 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
         <div>
             <form class="row justify-content-around" action="/booking/processNewBooking" method="POST">
                 <input type="hidden" name="bookingDate" value="<?= $bookingDate ?>">
-                <input type="hidden" name="deskName" value="<?= $deskName ?>">
-                <input type="hidden" name="deskId" value="<?= $deskID ?>">
+                <input type="hidden" name="deskName" value="<?= $deskName ?>"> <!-- TODO: do I need this? -->
+                <input type="hidden" name="deskID" value="<?= $deskID ?>">
                 <input class="btn btn-primary col-2 my-4" id="confirmBtn" type="submit" value="Confirm booking">
             </form>
         </div>
