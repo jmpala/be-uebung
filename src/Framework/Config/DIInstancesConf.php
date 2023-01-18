@@ -24,4 +24,5 @@ return [
     \Framework\Services\BookingService::class,
     \Framework\Services\DeskService::class,
     \Framework\Services\LoginService::class,
+    \Framework\Services\AuthenticationService::class,
 ];

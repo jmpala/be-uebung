@@ -3,23 +3,28 @@
 namespace Framework\Services;
 
 use Firebase\JWT\JWT;
-use Framework\DAOs\RoleDAO;
 use Framework\DAOs\UserDAO;
+use Framework\DAOs\UsersRolesDAO;
 use Framework\Session\SessionManager;
-use http\Client\Curl\User;
 
 class LoginService
 {
     private SessionManager $sessionManager;
 
+    private UserDAO $userDAO;
+
+    private UsersRolesDAO $usersRolesDAO;
+
     public function __construct()
     {
         $this->sessionManager = container(SessionManager::class);
+        $this->userDAO = container(UserDAO::class);
+        $this->usersRolesDAO = container(UsersRolesDAO::class);
     }
 
     public function login(string $email, string $password): bool
     {
-        $user = UserDAO::selectByEmail($email);
+        $user = $this->userDAO::selectByEmail($email);
         if (is_null($user)) {
             return false;
         }
@@ -31,8 +36,8 @@ class LoginService
         $this->sessionManager->logIn();
         $this->sessionManager->add(SessionManager::USER_ID, $user['id']);
 
-        $role = RoleDAO::selectById($user['role_id']);
-        $this->sessionManager->add(SessionManager::USER_ROLE, $role['code']);
+        $roles = $this->usersRolesDAO->getRolesFromUserId($user['id']);
+        $this->sessionManager->add(SessionManager::USER_ROLE, $roles);
 
         $token = $this->generateJWTToken($user['password']);
         setcookie('jwttoken', $token, time() + 3600, '/', 'be-uebung.ddev.site', false, true); // TODO: refactor in config file & is there a better way to handle this?
