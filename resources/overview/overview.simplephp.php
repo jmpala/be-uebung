@@ -28,17 +28,17 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="true" href="/overview">Overview</a>
                 </li>
-                <?php if ($role === "usr" || $role === "tml" || $role === "adm") : ?>
+                <?php if ($role === "user" || $role === "teamlead" || $role === "admin") : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/booking/createBooking">Bookings</a>
                     </li>
                 <?php endif; ?>
-                <?php if ($role === "tml" || $role === "adm") : ?>
+                <?php if ($role === "teamlead" || $role === "admin") : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/booking/overview">Planning</a>
+                        <a class="nav-link" href="/planning">Planning</a>
                     </li>
                 <?php endif; ?>
-                <?php if ($role === "adm") : ?>
+                <?php if ($role === "admin") : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin">Admin</a>
                     </li>

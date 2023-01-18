@@ -37,7 +37,10 @@ class LoginService
         $this->sessionManager->add(SessionManager::USER_ID, $user['id']);
 
         $roles = $this->usersRolesDAO->getRolesFromUserId($user['id']);
-        $this->sessionManager->add(SessionManager::USER_ROLE, $roles);
+
+        foreach ($roles as $role) {
+            $this->sessionManager->add(SessionManager::USER_ROLE, $role['code']);
+        }
 
         $token = $this->generateJWTToken($user['password']);
         setcookie('jwttoken', $token, time() + 3600, '/', 'be-uebung.ddev.site', false, true); // TODO: refactor in config file & is there a better way to handle this?

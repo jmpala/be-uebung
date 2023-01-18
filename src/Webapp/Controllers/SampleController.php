@@ -5,15 +5,18 @@ namespace Webapp\Controllers;
 use Framework\Contracts\Controller;
 use Framework\Http\Request;
 use Framework\Http\Response;
-use Framework\View\Manager;
 
 class SampleController implements Controller
 {
+    private Response $response;
+
+    public function __construct()
+    {
+        $this->response = container(Response::class);
+    }
+
     public function handle(Request $request): Response
     {
-
-        return handleView('homeSample.simplephp.php', [
-                    'name' => 'Juan'
-                ]);
+        return redirect('/overview');
     }
 }
