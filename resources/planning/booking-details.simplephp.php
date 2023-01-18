@@ -13,7 +13,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="/dist/img/favicon.png">
-    <title>Booking Confirmation</title>
+    <title>Booking Details</title>
     <script defer src="/dist/js/overview.5fa5d8d69c48333a6195.js"></script></head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -57,28 +57,22 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
             <nav class="my-4 col-12 d-flex justify-content-around" aria-label="breadcrumb">
                 <div class="d-flex py-2 px-3 border rounded">
                     <ol class="breadcrumb m-0 justify-content-center">
-                        <li class="breadcrumb-item active">Confirmation</li>
-                        <li class="breadcrumb-item">Booked</li>
+                        <li class="breadcrumb-item">Confirmation</li>
+                        <li class="breadcrumb-item active">Booked</li>
                     </ol>
                 </div>
             </nav>
         </div>
         <div class="row justify-content-around">
             <div class="col-8 py-3 border rounded">
-                <p class="text-center">For user: <?= $userName ?></p>
+                <p class="text-center">Confirmation Number: <?= $confirmation ?></p>
+                <p class="text-center">User Name: <?= $userName ?></p>
                 <p class="text-center">Date: <?= $bookingDate ?></p>
                 <p class="text-center">Desk: <?= $deskName ?></p>
             </div>
         </div>
-        <div>
-            <form class="row justify-content-around" action="/planning/processNewBooking" method="POST">
-                <input type="hidden" name="bookingDate" value="<?= $bookingDate ?>">
-                <input type="hidden" name="deskName" value="<?= $deskName ?>">
-                <input type="hidden" name="deskID" value="<?= $deskID ?>">
-                <input type="hidden" name="userName" value="<?= $userName ?>">
-                <input type="hidden" name="userID" value="<?= $userID ?>">
-                <input class="btn btn-primary col-2 my-4" id="confirmBtn" type="submit" value="Confirm booking">
-            </form>
+        <div class="row justify-content-around">
+            <a href="/planning/user=<?= $userID ?>&page=1" type="button" class="btn btn-primary col-2 my-4">To Overview Page</a>
         </div>
     </div>
 </main>

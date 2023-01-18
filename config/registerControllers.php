@@ -27,6 +27,7 @@ return [
     'GET:/planning/{?userpage}' => \Webapp\Controllers\Planning\ShowPlanningOverviewController::class,
     'POST:/planning' => \Webapp\Controllers\Planning\ShowPlanningOverviewController::class,
     'POST:/planning/confirmation' => \Webapp\Controllers\Planning\ShowPlanningBookingConfirmationController::class, // TODO: should this be a GET?
+    'POST:/planning/processNewBooking' => \Webapp\Controllers\Planning\ProcessNewBookingController::class,
 
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
