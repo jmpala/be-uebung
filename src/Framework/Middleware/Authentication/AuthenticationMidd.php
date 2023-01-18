@@ -14,15 +14,14 @@ class AuthenticationMidd extends AbstractHandler
     private int $secondsBeforeIdRegen;
     private int $secondsBeforeSessionExpire;
 
-    private array $publicRoutes = [
-        '/login',
-        '/api/login',
-    ];
+    private array $publicRoutes;
 
     public function __construct()
     {
         $this->secondsBeforeIdRegen = configs('middleware.authentication.sec_regenerate_session');
         $this->secondsBeforeSessionExpire = configs('middleware.authentication.sec_expire_session');
+
+        $this->publicRoutes = include __DIR__ . '/../../../../config/appPublicRoutes.php';
     }
 
     protected function process(Request $request): Request

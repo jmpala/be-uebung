@@ -18,7 +18,7 @@ class App
     private CONST CONFIG_FRAMEWORK_DI_FILE = 'DIInstancesConf';
     public CONST CONFIG_FRAMEWORK_DB_KEY = 'CONFIG_DB';
     private CONST CONFIG_FRAMEWORK_DB_FILE = 'DBConf';
-    private CONST CONFIG_FRAMEWORK_CONTROLLERS_FILE = 'RegisterControllers';
+    private CONST CONFIG_FRAMEWORK_CONTROLLERS_FILE = 'registerControllers';
     private CONST CONFIG_FRAMEWORK_MIDDLEWARE_FILE = 'MiddlewareHandlersConfig';
 
     private array $appConf = [];
