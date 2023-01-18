@@ -18,6 +18,7 @@ return [
     \Framework\DAOs\DesksDAO::class,
     \Framework\DAOs\UserDAO::class,
     \Framework\DAOs\RoleDAO::class,
+    \Framework\DAOs\UsersRolesDAO::class,
 
     // Services
     \Framework\Services\BookingService::class,
