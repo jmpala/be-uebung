@@ -22,4 +22,9 @@ class UserService
     {
         return $this->userDAO::selectById($id);
     }
+
+    public function getUserName(int $id): string
+    {
+        return $this->userDAO::selectById($id)['name'];
+    }
 }
