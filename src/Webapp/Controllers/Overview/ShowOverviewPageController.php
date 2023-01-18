@@ -31,7 +31,7 @@ class ShowOverviewPageController implements Controller
 
 
         $session = container(SessionManager::class);
-        $userId = $session->get(SessionManager::USER_ID);
+        $userId = $session->get(SessionManager::USER_ID); // TODO: refactor, use container on constructor
 
         $bookings = $this->bookingService->getBookingsByUserIdPerPage($userId, $currentPage);
         $totalBookings = $this->bookingService->getTotalNumberOfBookingByUserId($userId);
