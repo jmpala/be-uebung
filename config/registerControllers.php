@@ -22,6 +22,12 @@ return [
     'POST:/booking/processDeleteBooking/{id}' => \Webapp\Controllers\Booking\ProcessDeleteBookingController::class,
     'GET:/booking/createBooking' => \Webapp\Controllers\Booking\ShowBookingCreationController::class,
 
+    // Planning
+    'GET:/planning' => \Webapp\Controllers\Planning\ShowPlanningOverviewController::class,
+    'GET:/planning/{?userpage}' => \Webapp\Controllers\Planning\ShowPlanningOverviewController::class,
+    'POST:/planning' => \Webapp\Controllers\Planning\ShowPlanningOverviewController::class,
+    'POST:/planning/confirmation' => \Webapp\Controllers\Planning\ShowPlanningBookingConfirmationController::class, // TODO: should this be a GET?
+
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
     'GET:/api/desks/availability' =>  \RESTapi\Controllers\Desks\ProcessGetAvailabilityInformationRESTController::class,

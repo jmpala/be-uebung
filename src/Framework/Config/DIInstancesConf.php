@@ -25,4 +25,5 @@ return [
     \Framework\Services\DeskService::class,
     \Framework\Services\LoginService::class,
     \Framework\Services\AuthenticationService::class,
+    \Framework\Services\UserService::class,
 ];
