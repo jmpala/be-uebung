@@ -77,4 +77,24 @@ class UserService
     {
         return $this->roleDAO::selectById($id)['name'];
     }
+
+    public function updateUser(array $user, int $roleID): bool
+    {
+        $changed = $this->userDAO::update($user);
+
+        $this->usersRolesDAO::deleteByUserId($user['id']);
+
+        if ($roleID === 3) { // TODO: million dollar FANG code, please dont share
+            $this->usersRolesDAO::insert(['user_id' => $user['id'], 'role_id' => 1]);
+            $this->usersRolesDAO::insert(['user_id' => $user['id'], 'role_id' => 2]);
+            $this->usersRolesDAO::insert(['user_id' => $user['id'], 'role_id' => 3]);
+        } else if ($roleID === 2) {
+            $this->usersRolesDAO::insert(['user_id' => $user['id'], 'role_id' => 1]);
+            $this->usersRolesDAO::insert(['user_id' => $user['id'], 'role_id' => 2]);
+        } else {
+            $this->usersRolesDAO::insert(['user_id' => $user['id'], 'role_id' => 1]);
+        }
+
+        return $changed;
+    }
 }

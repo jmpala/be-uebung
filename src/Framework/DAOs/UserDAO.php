@@ -59,24 +59,22 @@ class UserDAO implements DAO
         return $conn->lastInsertId();
     }
 
-    public static function update(array $dao): void
+    public static function update(array $dao): bool
     {
         [
             'id' => $id,
             'name' => $name,
-            'password' => $password,
             'email' => $email
         ] = $dao;
         $conn = dbconn();
         $query = "UPDATE " . self::getTable() .
-            " SET name = :name, password = :password , email = :email" .
+            " SET name = :name, email = :email" .
             " WHERE id = :id";
         $stmt = $conn->prepare($query);
         $stmt->bindValue('name', $name);
-        $stmt->bindValue('password', $password);
         $stmt->bindValue('email', $email);
         $stmt->bindValue('id', $id);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public static function delete(array $dao): void

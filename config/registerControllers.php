@@ -36,6 +36,9 @@ return [
     'POST:/admin/user/confirmation' => \Webapp\Controllers\Admin\ShowConfirmationController::class,
     'POST:/admin/user/processNewUser' => \Webapp\Controllers\Admin\ProcessNewUserController::class,
     'POST:/admin/user/processDeleteUser/{id}' => \Webapp\Controllers\Admin\ProcessDeleteUserController::class,
+    'GET:/admin/user/edit/{id}' => \Webapp\Controllers\Admin\ShowEditUserController::class,
+    'POST:/admin/user/edit/confirmation' => \Webapp\Controllers\Admin\ShowEditConfirmationController::class,
+    'POST:/admin/user/edit/process' => \Webapp\Controllers\Admin\ProcessEditUserController::class,
 
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,

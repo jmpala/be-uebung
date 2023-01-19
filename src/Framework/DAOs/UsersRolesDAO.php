@@ -37,7 +37,7 @@ class UsersRolesDAO implements DAO
         return $conn->lastInsertId();
     }
 
-    public static function update(array $dao): void
+    public static function update(array $dao): bool
     {
         throw new \Exception('Not implemented');
     }
@@ -50,6 +50,15 @@ class UsersRolesDAO implements DAO
     public static function deleteById(int $id): void
     {
         throw new \Exception('Not implemented');
+    }
+
+    public static function deleteByUserId(int $userId): void
+    {
+        $conn = dbconn();
+        $query = "DELETE FROM " . self::getTable() . " WHERE user_id = :user_id;";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('user_id', $userId, \PDO::PARAM_INT);
+        $stmt->execute();
     }
 
     public static function isCreated(int $id): bool

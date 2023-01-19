@@ -83,7 +83,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                             <th><?= $user['name'] ?></th>
                             <th><?= $user['email'] ?></th>
                             <th>
-                                <a class="btn btn-primary btn-edit" href="/admin/userEdit/<?= $user['id'] ?>">Edit</a>
+                                <a class="btn btn-primary btn-edit" href="/admin/user/edit/<?= $user['id'] ?>">Edit</a>
                                 <button type="button" class="btn btn-primary btn-delete" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Delete</button>
                             </th>
                         </tr>
