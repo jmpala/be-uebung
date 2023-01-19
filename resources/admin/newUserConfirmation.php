@@ -64,8 +64,8 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                 <p class="text-center">Email: <?= $email ?></p>
             </div>
         </div>
-        <form class="row justify-content-around" action="POST:/admin/user/processNewUser" method="POST">
-            <input type="hidden" name="userNAme" value="<?= $name ?>">
+        <form class="row justify-content-around" action="/admin/user/processNewUser" method="POST">
+            <input type="hidden" name="userName" value="<?= $name ?>">
             <input type="hidden" name="userEmail" value="<?= $email ?>">
             <input id="confirmBtn" type="submit" class="btn btn-primary col-2 my-4" value="Confirm" >
         </form>
