@@ -43,4 +43,9 @@ class UserService
         $user['password'] = password_hash('test@123', PASSWORD_DEFAULT); // TODO: see how to set a default password and send email to user in order to change it
         return $this->userDAO::insert($user);
     }
+
+    public function removeById(int $id): void
+    {
+        $this->userDAO::deleteById($id);
+    }
 }
