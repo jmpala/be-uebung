@@ -67,11 +67,11 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
         <form class="create-user__form" action="/admin/user/confirmation" method="POST">
             <div class="row justify-content-around">
                 <div class="create-user__container col-8 px-2 py-4 border rounded">
-                    <input type="text" id="userName" class="create-user__first-name rounded-2 w-100" required>
+                    <input type="text" id="userName" name="userName" class="create-user__first-name rounded-2 w-100" required>
                     <label for="userName" class="create-user__first-name-lbl w-100">First Name</label>
-                    <input type="text" id="userLastName" class="create-user__last-name rounded-2 w-100" required>
+                    <input type="text" id="userLastName" name="userLastName" class="create-user__last-name rounded-2 w-100" required>
                     <label for="userLastName" class="create-user__last-name-lbl w-100">Last Name</label>
-                    <input type="email" id="userEmail" class="create-user__email rounded-2 w-100" required>
+                    <input type="email" id="userEmail" name="userEmail" class="create-user__email rounded-2 w-100" required>
                     <label for="userEmail" class="create-user__email-lbl w-100">Email</label>
                 </div>
             </div>

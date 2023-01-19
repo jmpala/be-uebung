@@ -33,6 +33,7 @@ return [
     'GET:/admin' => \Webapp\Controllers\Admin\ShowAdminPanelController::class,
     'GET:/admin/{?page}' => \Webapp\Controllers\Admin\ShowAdminPanelController::class,
     'GET:/admin/user/create' => \Webapp\Controllers\Admin\ShowNewUserController::class, // TODO: fix, when "GET:/admin/newUser", router resolves to "GET:/admin/{?page}"
+    'POST:/admin/user/confirmation' => \Webapp\Controllers\Admin\ShowConfirmationController::class,
 
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
