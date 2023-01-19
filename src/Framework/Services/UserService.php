@@ -27,4 +27,14 @@ class UserService
     {
         return $this->userDAO::selectById($id)['name'];
     }
+
+    public function getAllUsersPerPage(int $page): array
+    {
+        return $this->userDAO::getAllUsersPerPage($page);
+    }
+
+    public function getTotalNumberOfUsers(): int
+    {
+        return $this->userDAO::getTotalNumberOfUsers();
+    }
 }

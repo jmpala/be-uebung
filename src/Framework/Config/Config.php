@@ -15,6 +15,7 @@ return [ // TODO: change to env variables or properties
 
     // PAGINATION
     'pagination.bookings_per_page' => 5,
+    'pagination.users_per_page' => 10, // Admin Panel
     // END PAGINATION
 
     // START REST api

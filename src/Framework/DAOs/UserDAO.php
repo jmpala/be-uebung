@@ -106,4 +106,23 @@ class UserDAO implements DAO
         $res = $stmt->fetch(\PDO::FETCH_NUM)[0];
         return $res !== "0";
     }
+
+    public static function getAllUsersPerPage(int $page): array
+    {
+        $conn = dbconn();
+        $query = "SELECT * FROM " . self::getTable() . " LIMIT :limit OFFSET :offset;";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('limit', configs('pagination.users_per_page'), \PDO::PARAM_INT);
+        $stmt->bindValue('offset', ($page - 1) * configs('pagination.users_per_page'), \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getTotalNumberOfUsers(): int
+    {
+        $conn = dbconn();
+        $query = "SELECT COUNT(*) FROM " . self::getTable() . ";";
+        $stmt = $conn->query($query);
+        return $stmt->fetch(\PDO::FETCH_NUM)[0];
+    }
 }

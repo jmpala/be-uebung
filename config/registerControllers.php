@@ -29,6 +29,10 @@ return [
     'POST:/planning/confirmation' => \Webapp\Controllers\Planning\ShowPlanningBookingConfirmationController::class, // TODO: should this be a GET?
     'POST:/planning/processNewBooking' => \Webapp\Controllers\Planning\ProcessNewBookingController::class,
 
+    // Admnin
+    'GET:/admin' => \Webapp\Controllers\Admin\ShowAdminPanelController::class,
+    'GET:/admin/{?page}' => \Webapp\Controllers\Admin\ShowAdminPanelController::class,
+
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
     'GET:/api/desks/availability' =>  \RESTapi\Controllers\Desks\ProcessGetAvailabilityInformationRESTController::class,
