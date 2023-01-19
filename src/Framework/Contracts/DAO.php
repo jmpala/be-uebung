@@ -12,7 +12,7 @@ interface DAO
 
     public static function insert(array $dao): int;
 
-    public static function update(array $dao): void;
+    public static function update(array $dao): bool;
 
     public static function delete(array $dao): void;
 

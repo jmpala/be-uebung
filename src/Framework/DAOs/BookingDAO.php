@@ -51,7 +51,7 @@ class BookingDAO implements DAO
         return $conn->lastInsertId();
     }
 
-    public static function update(array $dao): void
+    public static function update(array $dao): bool
     {
         [
             'id' => $id,
@@ -68,7 +68,7 @@ class BookingDAO implements DAO
         $stmt->bindValue('user_id', $userId);
         $stmt->bindValue('start_date', $startDate);
         $stmt->bindValue('end_date', $endDate);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public static function delete(array $dao): void

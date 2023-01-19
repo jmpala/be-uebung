@@ -46,7 +46,7 @@ class DeskDAO implements DAO
         return $conn->lastInsertId();
     }
 
-    public static function update(array $dao): void
+    public static function update(array $dao): bool
     {
         [
             'id' => $id,
@@ -59,7 +59,7 @@ class DeskDAO implements DAO
         $stmt = $conn->prepare($query);
         $stmt->bindValue('id', $id, \PDO::PARAM_INT);
         $stmt->bindValue('code', $code);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public static function delete(array $dao): void

@@ -48,7 +48,7 @@ class RoleDAO implements DAO
         return $conn->lastInsertId();
     }
 
-    public static function update(array $dao): void
+    public static function update(array $dao): bool
     {
         [
             'id' => $id,
@@ -63,7 +63,7 @@ class RoleDAO implements DAO
         $stmt->bindValue('id', $id);
         $stmt->bindValue('code', $code);
         $stmt->bindValue('name', $name);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public static function delete(array $dao): void
