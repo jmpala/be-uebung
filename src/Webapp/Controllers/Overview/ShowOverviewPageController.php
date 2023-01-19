@@ -5,6 +5,7 @@ namespace Webapp\Controllers\Overview;
 use Framework\Contracts\Controller;
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Http\StatusCode;
 use Framework\Services\BookingService;
 use Framework\Session\SessionManager;
 
@@ -21,8 +22,6 @@ class ShowOverviewPageController implements Controller
 
     public function handle(Request $request): Response
     {
-        $this->response->statusCode(200);
-
         if ($request->existURIParam('page')) {
             $currentPage = $request->getURIParam('page');
         } else {
@@ -41,6 +40,7 @@ class ShowOverviewPageController implements Controller
         $previousPage = $currentPage - 1 >= 1 ? $currentPage - 1 : null;
         $nextPage = $currentPage + 1 <= $totalPages ? $currentPage + 1 : null;
 
+        $this->response->statusCode(StatusCode::OK);
         return handleView('overview/overview.simplephp.php',[
             'bookings' =>$bookings,
             'currentPage' => $currentPage,
