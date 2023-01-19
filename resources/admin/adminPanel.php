@@ -59,10 +59,10 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
             <div class="col-12 col-md-12">
                 <div class="row">
                     <div class="col-6">
-                        <a class="btn btn-dark w-100" href="/admin/newUser">Create User</a>
+                        <a class="btn btn-dark w-100" href="/admin/user/create">Create User</a>
                     </div>
                     <div class="col-6">
-                        <a class="btn btn-dark w-100" href="/admin/setAvailability">Set Availability</a>
+                        <a class="btn btn-dark w-100" href="/admin/desk/setAvailability">Set Availability</a>
                     </div>
                 </div>
             </div>
