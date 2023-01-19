@@ -73,6 +73,11 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                     <label for="userLastName" class="create-user__last-name-lbl w-100">Last Name</label>
                     <input type="email" id="userEmail" name="userEmail" class="create-user__email rounded-2 w-100" required>
                     <label for="userEmail" class="create-user__email-lbl w-100">Email</label>
+                    <select class="form-select" id="userRole" name="userRoleID">
+                        <?php foreach ($roles as $role) : ?>
+                            <option value="<?= $role['id'] ?>"><?= $role['name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
             <div class="row justify-content-around">

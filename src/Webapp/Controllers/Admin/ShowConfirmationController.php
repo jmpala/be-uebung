@@ -6,13 +6,16 @@ use Framework\Contracts\Controller;
 use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Http\StatusCode;
+use Framework\Services\UserService;
 
 class ShowConfirmationController implements Controller
 {
+    private UserService $userService;
     private Response $response;
 
     public function __construct()
     {
+        $this->userService = container(UserService::class);
         $this->response = container(Response::class);
     }
 
@@ -20,11 +23,16 @@ class ShowConfirmationController implements Controller
     {
         $name = implode( ' ', [$request->getPostParam('userName'), $request->getPostParam('userLastName')]);
         $email = $request->getPostParam('userEmail');
+        $roleID = $request->getPostParam('userRoleID');
+
+        $roleName = $this->userService->getRoleName($roleID);
 
         $this->response->statusCode(StatusCode::OK);
         return handleView('admin/newUserConfirmation.php', [
             'name' => $name,
-            'email' => $email
+            'email' => $email,
+            'roleID' => $roleID,
+            'roleName' => $roleName,
         ]);
     }
 }

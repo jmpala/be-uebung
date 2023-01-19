@@ -62,11 +62,13 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
             <div class="col-8 py-3 border rounded">
                 <p class="text-center">User Name: <?= $name ?></p>
                 <p class="text-center">Email: <?= $email ?></p>
+                <p class="text-center">Role: <?= $roleName ?></p>
             </div>
         </div>
         <form class="row justify-content-around" action="/admin/user/processNewUser" method="POST">
             <input type="hidden" name="userName" value="<?= $name ?>">
             <input type="hidden" name="userEmail" value="<?= $email ?>">
+            <input type="hidden" name="roleID" value="<?= $roleID ?>">
             <input id="confirmBtn" type="submit" class="btn btn-primary col-2 my-4" value="Confirm" >
         </form>
     </div>

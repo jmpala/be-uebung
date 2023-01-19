@@ -63,6 +63,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
                 <p class="text-center">User-ID: <?= $id ?></p>
                 <p class="text-center">Name: <?= $name ?></p>
                 <p class="text-center">Email: <?= $email ?></p>
+                <p class="text-center">Role: <?= $roleName ?></p>
             </div>
         </div>
         <div class="row justify-content-around">

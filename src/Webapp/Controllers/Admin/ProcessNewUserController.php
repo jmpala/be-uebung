@@ -23,17 +23,21 @@ class ProcessNewUserController implements Controller
     {
         $name = $request->getPostParam('userName');
         $email= $request->getPostParam('userEmail');
+        $roleID = $request->getPostParam('roleID');
 
         $newUser = $this->userService->createUser([
             'name' => $name,
             'email' => $email,
-        ]);
+        ], $roleID);
+
+        $roleName = $this->userService->getRoleName($roleID);
 
         $this->response->statusCode(StatusCode::OK);
         return handleView('admin/newUserDetails.php', [
             'id' => $newUser,
             'name' => $name,
             'email' => $email,
+            'roleName' => $roleName,
         ]);
     }
 }

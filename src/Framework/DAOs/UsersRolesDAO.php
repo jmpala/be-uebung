@@ -9,7 +9,7 @@ class UsersRolesDAO implements DAO
 
     public static function getTable(): string
     {
-        throw new \Exception('Not implemented');
+        return 'users_roles';
     }
 
     public static function selectById(int $id): array
@@ -24,7 +24,17 @@ class UsersRolesDAO implements DAO
 
     public static function insert(array $dao): int
     {
-        throw new \Exception('Not implemented');
+        [
+            'user_id' => $userId,
+            'role_id' => $roleId
+        ] = $dao;
+        $conn = dbconn();
+        $query = "INSERT INTO users_roles (user_id, role_id) VALUES (:user_id, :role_id)";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('user_id', $userId, \PDO::PARAM_INT);
+        $stmt->bindValue('role_id', $roleId, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $conn->lastInsertId();
     }
 
     public static function update(array $dao): void

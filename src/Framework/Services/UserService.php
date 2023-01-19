@@ -2,15 +2,21 @@
 
 namespace Framework\Services;
 
+use Framework\DAOs\RoleDAO;
 use Framework\DAOs\UserDAO;
+use Framework\DAOs\UsersRolesDAO;
 
 class UserService
 {
     private UserDAO $userDAO;
+    private RoleDAO $roleDAO;
+    private UsersRolesDAO $usersRolesDAO;
 
     public function __construct()
     {
         $this->userDAO = container(UserDAO::class);
+        $this->roleDAO = container(RoleDAO::class);
+        $this->usersRolesDAO = container(UsersRolesDAO::class);
     }
 
     public function getAllUsers(): array
@@ -38,14 +44,37 @@ class UserService
         return $this->userDAO::getTotalNumberOfUsers();
     }
 
-    public function createUser(array $user): int
+    public function createUser(array $user, int $roleId): int
     {
         $user['password'] = password_hash('test@123', PASSWORD_DEFAULT); // TODO: see how to set a default password and send email to user in order to change it
-        return $this->userDAO::insert($user);
+        $newUserID = $this->userDAO::insert($user);
+
+        if ($roleId === 3) { // TODO: million dollar FANG code, please dont share
+            $this->usersRolesDAO::insert(['user_id' => $newUserID, 'role_id' => 1]);
+            $this->usersRolesDAO::insert(['user_id' => $newUserID, 'role_id' => 2]);
+            $this->usersRolesDAO::insert(['user_id' => $newUserID, 'role_id' => 3]);
+        } else if ($roleId === 2) {
+            $this->usersRolesDAO::insert(['user_id' => $newUserID, 'role_id' => 1]);
+            $this->usersRolesDAO::insert(['user_id' => $newUserID, 'role_id' => 2]);
+        } else {
+            $this->usersRolesDAO::insert(['user_id' => $newUserID, 'role_id' => 1]);
+        }
+
+        return $newUserID;
     }
 
     public function removeById(int $id): void
     {
         $this->userDAO::deleteById($id);
+    }
+
+    public function getAvailableRoles(): array
+    {
+        return $this->roleDAO::selectAll();
+    }
+
+    public function getRoleName(int $id): string
+    {
+        return $this->roleDAO::selectById($id)['name'];
     }
 }
