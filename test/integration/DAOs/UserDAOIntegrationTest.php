@@ -33,7 +33,7 @@ class UserDAOIntegrationTest extends TestCase
     public function testUpdateUser(): void
     {
         $user = UserDAO::selectById(1);
-        $user['password'] = random_int(10000000, 99999999);
+        $user['name'] = (string) random_int(10000000, 99999999);
         UserDAO::update($user);
         $res = UserDAO::selectById(1);
         self::assertEquals($user['password'], $res['password']);

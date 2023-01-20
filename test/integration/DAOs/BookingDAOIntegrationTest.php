@@ -2,6 +2,7 @@
 
 namespace integration\DAOs;
 
+use Cassandra\Date;
 use Framework\DAOs\BookingDAO;
 use PHPUnit\Framework\TestCase;
 
@@ -20,8 +21,9 @@ class BookingDAOIntegrationTest extends TestCase
 
         $booking = [
             'user_id' => 1,
-            'start_date' => date('Y-m-d H:i:s', $startDate),
-            'end_date' => date('Y-m-d H:i:s', $endDate)
+            'desk_id' => 1,
+            'start_date' => new \DateTime(),
+            'end_date' => new \DateTime()
         ];
 
 
@@ -55,8 +57,9 @@ class BookingDAOIntegrationTest extends TestCase
     {
         $booking = [
             'user_id' => 1,
-            'start_date' => date('Y-m-d H:i:s', time()),
-            'end_date' => date('Y-m-d H:i:s', time() + 24 * 60 * 60)
+            'desk_id' => 1,
+            'start_date' => new \DateTime(),
+            'end_date' => new \DateTime()
         ];
         $id = BookingDAO::insert($booking);
         self::assertTrue(BookingDAO::isCreated($id));
@@ -68,8 +71,9 @@ class BookingDAOIntegrationTest extends TestCase
     {
         $booking = [
             'user_id' => 1,
-            'start_date' => date('Y-m-d H:i:s', time()),
-            'end_date' => date('Y-m-d H:i:s', time() + 24 * 60 * 60)
+            'desk_id' => 1,
+            'start_date' => new \DateTime(),
+            'end_date' => new \DateTime()
         ];
         $id = BookingDAO::insert($booking);
         $toDelete = BookingDAO::selectById($id);
