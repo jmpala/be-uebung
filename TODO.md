@@ -20,3 +20,15 @@ The ones I do care are:
 
 ## Users
 - Profile picture
+
+
+## Functionality
+
+- There are 3 roles: Admin, Teamlead and User
+- The user can create and delete its own booking
+- The teamlead can create and delete its own booking and also the ones of the users
+- The admin can do what the teamlead can do and also create, edit and delete user accounts
+- The admin can block desks with a "blocking user"
+
+---
+
