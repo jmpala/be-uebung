@@ -81,7 +81,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
             <canvas id="seatmap" class="col-12">Canvas not supported by your browser, please update</canvas>
         </div>
         <div class="row justify-content-center">
-            <button class="btn btn-primary col-12 col-sm-2 my-4" id="enable-disable">Enable</button>
+            <button class="btn btn-primary col-12 col-sm-2 my-4" id="enable-disable">Disable booking</button>
         </div>
     </div>
 </main>
