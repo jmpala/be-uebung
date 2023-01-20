@@ -28,6 +28,10 @@ class ShowPlanningBookingConfirmationController implements Controller
         $desk_id = $request->getPostParam('selected-desk');
         $bookingDate = $request->getPostParam('selected-date');
 
+        if (!$desk_id) { // TODO: see if this is a correct logic way of handling this case, only a lazy error handling until I decide how to handle errors in general
+            return redirect('/planning');
+        }
+
         $deskName = $this->deskService->getDeskName($desk_id);
         $userName = $this->userService->getUserName($userid);
 
