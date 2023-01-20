@@ -101,14 +101,13 @@ class BookingService
                 $this->bookingDAO::deleteById($booking['id']);
             } else {
                 $blockUser = $this->userDAO::selectByEmail(configs('availability_utils.block_availability_user'));
-                $this->bookingDAO::insert([
-                    'start_date' => $date,
+                $this->bookingDAO::insert(['start_date' => $date,
                     'desk_id' => $deskID,
                     'user_id' => $blockUser['id'],
                 ]);
             }
         } catch (\Exception $e) {
-            throw new \Exception("Error while toggling desk: " . $e->getMessage());
+            throw new \RuntimeException("Error while toggling desk: " . $e->getMessage());
         }
     }
 }
