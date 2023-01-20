@@ -28,7 +28,7 @@ class ProcessNewBookingController implements Controller
         $res = $this->bookingService->createBooking([ // TODO: better name for $res
             'desk_id' => $deskID,
             'user_id' => $userID,
-            'start_date' => $bookingDate,
+            'start_date' => new \DateTime($bookingDate),
         ]);
 
         if ($res) {

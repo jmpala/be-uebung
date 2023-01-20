@@ -39,9 +39,11 @@ return [
     'GET:/admin/user/edit/{id}' => \Webapp\Controllers\Admin\ShowEditUserController::class,
     'POST:/admin/user/edit/confirmation' => \Webapp\Controllers\Admin\ShowEditConfirmationController::class,
     'POST:/admin/user/edit/process' => \Webapp\Controllers\Admin\ProcessEditUserController::class,
+    'GET:/admin/desk/setAvailability' => \Webapp\Controllers\Admin\ShowSetAvailabilityController::class,
 
     // REST API
     'POST:/api/login' => \RESTapi\Controllers\Login\ProcessLoginRESTController::class,
     'GET:/api/desks/availability' =>  \RESTapi\Controllers\Desks\ProcessGetAvailabilityInformationRESTController::class,
     'GET:/api/desks/availability/{?date}' =>  \RESTapi\Controllers\Desks\ProcessGetAvailabilityInformationRESTController::class,
+    'GET:/api/desks/toggleAvailability/{?dateDesk}' =>  \RESTapi\Controllers\Desks\ProcessDisableDeskRESTController::class,
 ];

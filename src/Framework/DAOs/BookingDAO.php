@@ -45,8 +45,8 @@ class BookingDAO implements DAO
         $stmt = $conn->prepare($query);
         $stmt->bindValue('user_id', $userId);
         $stmt->bindValue('desk_id', $deskId);
-        $stmt->bindValue('start_date', $startDate);
-        $stmt->bindValue('end_date', $endDate);
+        $stmt->bindValue('start_date', $startDate->format('Y-m-d'));
+        $stmt->bindValue('end_date', $endDate->format('Y-m-d'));
         $stmt->execute();
         return $conn->lastInsertId();
     }
@@ -139,6 +139,17 @@ class BookingDAO implements DAO
                     ORDER BY `desks`.`code` ASC";
         $stmt = $conn->prepare($query);
         $stmt->bindValue('date', $date->format('Y-m-d'));
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getBookingByDateAndDeskId(\DateTime $date, int $deskID): array
+    {
+        $conn = dbconn();
+        $query = "SELECT * FROM " . self::getTable() . " WHERE start_date = :start_date AND desk_id = :desk_id;"; // TODO: in case of booking for multiple days, review code!
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue('start_date', $date->format('Y-m-d'));
+        $stmt->bindValue('desk_id', $deskID);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }

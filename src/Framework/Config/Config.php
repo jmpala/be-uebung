@@ -31,4 +31,8 @@ return [ // TODO: change to env variables or properties
     'middleware.authentication.sec_regenerate_session' => '300',
     'middleware.authentication.sec_expire_session' => '360',
     // END MIDDLEWARE
+
+    // START AVAILABILITY UTILS
+    'availability_utils.block_availability_user' => 'block@block',
+    // END AVAILABILITY UTILS
 ];

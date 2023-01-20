@@ -14,7 +14,7 @@ $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="/dist/img/favicon.png">
     <title>Planning Page</title>
-<script defer src="/dist/js/planning.3e0768a5359cc36cfee5.js"></script></head>
+    <script defer src="/dist/js/planning.543ccd12d196286a00fc.js"></script></head>
 <body class="d-flex flex-column min-vh-100">
 
 <nav class="navbar navbar-dark bg-dark navbar-expand-md sticky-top">

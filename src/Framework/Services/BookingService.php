@@ -3,14 +3,17 @@
 namespace Framework\Services;
 
 use Framework\DAOs\BookingDAO;
+use Framework\DAOs\UserDAO;
 
 class BookingService
 {
+    private UserDAO $userDAO;
     private BookingDAO $bookingDAO;
     private DeskService $deskService;
 
     public function __construct()
     {
+        $this->userDAO = container(UserDAO::class);
         $this->bookingDAO = container(BookingDAO::class);
         $this->deskService = container(DeskService::class);
     }
@@ -88,5 +91,24 @@ class BookingService
     public function deleteBooking(int $id): void
     {
         $this->bookingDAO::deleteById($id);
+    }
+    
+    public function toggleDesk(\DateTime $date, int $deskID): void
+    {
+        try {
+            $booking = $this->bookingDAO::getBookingByDateAndDeskId($date, $deskID);
+            if ($booking) {
+                $this->bookingDAO::deleteById($booking['id']);
+            } else {
+                $blockUser = $this->userDAO::selectByEmail(configs('availability_utils.block_availability_user'));
+                $this->bookingDAO::insert([
+                    'start_date' => $date,
+                    'desk_id' => $deskID,
+                    'user_id' => $blockUser['id'],
+                ]);
+            }
+        } catch (\Exception $e) {
+            throw new \Exception("Error while toggling desk: " . $e->getMessage());
+        }
     }
 }
