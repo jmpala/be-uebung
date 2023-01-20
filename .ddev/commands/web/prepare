@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo "----------------------------------------------------"
+echo "Starting Preparing the project"
+echo "----------------------------------------------------"
+echo "Installing composer dependencies & autoloader"
+composer install
+composer dump-autoload
+echo "----------------------------------------------------"
+echo "Running DB migrations"
+.ddev/commands/web/runmigrations
+echo "----------------------------------------------------"
+echo "Finished preparing the project"
+echo "----------------------------------------------------"
