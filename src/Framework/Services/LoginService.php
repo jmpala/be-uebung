@@ -38,6 +38,7 @@ class LoginService
         $this->sessionManager->logIn();
         $this->sessionManager->add(SessionManager::USER_ID, $user['id']);
 
+        $user['id'] = is_string($user['id']) ? (int) $user['id'] : $user['id'];
         $roles = $this->usersRolesDAO->getRolesFromUserId($user['id']);
 
         foreach ($roles as $role) {

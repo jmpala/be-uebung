@@ -22,6 +22,8 @@ class AuthenticationService
     {
         $roles = [];
         $userId = $this->sessionManager->get(SessionManager::USER_ID);
+
+        $userId = is_string($userId) ? (int) $userId : $userId;
         $res = $this->usersRolesDAO->getRolesFromUserId($userId);
 
         foreach ($res as $role) {

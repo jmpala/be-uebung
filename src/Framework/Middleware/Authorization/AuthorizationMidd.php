@@ -34,7 +34,7 @@ class AuthorizationMidd extends AbstractHandler
         $uri = $request->uri();
 
         // excepted urls
-        if (in_array($uri, $this->publicRoutes)) {
+        if (in_array($uri, $this->publicRoutes, true)) {
             return $request;
         }
 
