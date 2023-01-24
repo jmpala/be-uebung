@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RESTapi\Controllers\Login;
 
 use Framework\Contracts\Controller;

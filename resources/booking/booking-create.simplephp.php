@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Framework\Session\SessionManager;
 
 $role = container(SessionManager::class)->get(SessionManager::USER_ROLE);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\Session;
 
 // TODO: implement a commit method that will save the session data to the session storage

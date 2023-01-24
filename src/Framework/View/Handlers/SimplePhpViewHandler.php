@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\View\Handlers;
 
 class SimplePhpViewHandler implements \Framework\Contracts\ViewHandler

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Framework\Http\Response;
 use Framework\View\Manager;
 
@@ -29,7 +31,7 @@ if (!function_exists('handleView')) {
 }
 
 if (!function_exists('configs')) {
-    function configs(string $key): array|string
+    function configs(string $key): int|array|string
     {
         $configs = require __DIR__ . '/Config/Config.php';
         return $configs[$key];

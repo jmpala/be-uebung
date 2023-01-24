@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webapp\Controllers\Admin;
 
 use Framework\Contracts\Controller;

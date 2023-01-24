@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\Providers;
 
 use Framework\View\Handlers\SimplePhpViewHandler;

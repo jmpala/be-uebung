@@ -28,8 +28,8 @@ return [ // TODO: change to env variables or properties
     // END REST api
 
     // MIDDLEWARE
-    'middleware.authentication.sec_regenerate_session' => '300',
-    'middleware.authentication.sec_expire_session' => '360',
+    'middleware.authentication.sec_regenerate_session' => 300,
+    'middleware.authentication.sec_expire_session' => 360,
     // END MIDDLEWARE
 
     // START AVAILABILITY UTILS

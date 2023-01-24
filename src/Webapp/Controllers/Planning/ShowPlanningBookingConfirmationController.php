@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webapp\Controllers\Planning;
 
 use Framework\Contracts\Controller;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\Middleware\Authentication;
 
 use Firebase\JWT\JWT;
