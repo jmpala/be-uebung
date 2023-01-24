@@ -2,7 +2,7 @@
 
 return [ // TODO: change to env variables or properties
     // START DATABASE
-    'database.host' => 'ddev-be-uebung-db',
+    'database.host' => 'ddev-' . getenv('DDEV_SITENAME') . '-db',
     'database.port' => '3306',
     'database.dbname' => 'desksharing_dev',
     'database.user' => 'root',

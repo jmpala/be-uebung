@@ -43,7 +43,7 @@ class LoginService
         }
 
         $token = $this->generateJWTToken($user['password']);
-        setcookie('jwttoken', $token, time() + 3600, '/', 'be-uebung.ddev.site', false, true); // TODO: refactor in config file & is there a better way to handle this?
+        setcookie('jwttoken', $token, time() + 3600, '/', getenv('DDEV_SITENAME') . '.ddev.site', false, true); // TODO: refactor in config file & is there a better way to handle this?
 
         return true;
     }
